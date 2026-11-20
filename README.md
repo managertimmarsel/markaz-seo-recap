@@ -9,8 +9,8 @@ Dashboard laporan SEO 15 aplikasi Markaz, ditambah **rekap nama 4 tahap per card
 - `supabase/schema.sql` — tabel `review` (status terakhir per card) dan `review_log` (riwayat setiap perubahan).
 
 ## Setup
-1. Supabase: jalankan `supabase/schema.sql` di SQL Editor.
-2. Vercel: isi Environment Variables `SUPABASE_URL` dan `SUPABASE_ANON_KEY` (Settings → API di Supabase), lalu deploy. Build command `node scripts/build.mjs`, output `public` (sudah diatur di `vercel.json`).
+- Supabase: project `markaz-seo-recap` (Singapore) sudah dibuat dan tabelnya sudah ada (`supabase/schema.sql`).
+- Vercel: buka vercel.com/new → Import repo `markaz-seo-recap` → Deploy. Tidak perlu isi apa pun; build command dan output sudah diatur di `vercel.json`, dan alamat Supabase sudah ada di `scripts/build.mjs`. (Opsional: timpa lewat env `SUPABASE_URL` dan `SUPABASE_ANON_KEY`.)
 
 ## Membaca hasil tinjauan
 - Di halaman: menu **Rekap Nama 20/11** → filter status, atau tombol "Salin yang dipakai" (format tabel untuk Sheets).

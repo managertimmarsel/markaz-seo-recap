@@ -19,9 +19,13 @@ const html = `<!doctype html><html lang="id"><head><meta charset="utf-8"><meta n
 mkdirSync(join(root, 'public'), { recursive: true });
 writeFileSync(join(root, 'public/index.html'), html);
 
+// Default: project Supabase "markaz-seo-recap". Anon key memang dipakai di browser (bukan rahasia);
+// akses data dibatasi oleh Row Level Security di supabase/schema.sql. Bisa ditimpa lewat env Vercel.
+const DEFAULT_URL = 'https://zpmgxjvxslhvufmsgpav.supabase.co';
+const DEFAULT_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwbWd4anZ4c2xodnVmbXNncGF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNTQ5MTIsImV4cCI6MjExMDczMDkxMn0.fH9uR6NI8JIfRKPOw_APwY_G2Q9Y-7pDPWpuWG2x5qk';
 const cfg = {
-  supabaseUrl: process.env.SUPABASE_URL || '',
-  supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+  supabaseUrl: process.env.SUPABASE_URL || DEFAULT_URL,
+  supabaseAnonKey: process.env.SUPABASE_ANON_KEY || DEFAULT_ANON,
 };
 writeFileSync(join(root, 'public/config.js'), `window.MARKAZ_CONFIG=${JSON.stringify(cfg)};\n`);
 console.log(`index.html ${(html.length / 1024).toFixed(0)} KB · Supabase ${cfg.supabaseUrl ? 'terisi' : 'BELUM diisi'}`);
