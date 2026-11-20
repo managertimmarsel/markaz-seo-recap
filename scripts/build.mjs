@@ -1,6 +1,6 @@
 // Build tanpa dependency: gabungkan template + data JSON menjadi public/index.html,
 // dan tulis public/config.js dari environment variable Vercel (SUPABASE_URL, SUPABASE_ANON_KEY).
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -16,8 +16,13 @@ let body = rd('template.html')
   .replace('__RUMUS__', () => js('data/rumus20.json'))
   .replace('__MEETING__', () => js('data/meeting_stats.json'));
 
-const html = `<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"></head><body>${body}</body></html>`;
+// <title> dan ikon ditaruh di <head> agar browser menampilkan logo di tab.
+body = body.replace(/<title>[^<]*<\/title>\s*/, '').replace(/<link rel="(?:icon|apple-touch-icon)"[^>]*>\s*/g, '');
+const head = '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">'
+  + '<title>Markaz SEO</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">';
+const html = `<!doctype html><html lang="id"><head>${head}</head><body>${body}</body></html>`;
 mkdirSync(join(root, 'public'), { recursive: true });
+for (const f of readdirSync(join(root, 'static'))) copyFileSync(join(root, 'static', f), join(root, 'public', f));
 writeFileSync(join(root, 'public/index.html'), html);
 
 // Default: project Supabase "markaz-seo-recap". Anon key memang dipakai di browser (bukan rahasia);
