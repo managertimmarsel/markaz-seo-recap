@@ -97,6 +97,10 @@ select.sel{border:1px solid var(--line);background:var(--surface);border-radius:
 .tier.t1{background:var(--t1)} .tier.t2{background:var(--t2)} .tier.t3{background:var(--t3)}
 .mono{width:104px;height:104px;border-radius:24px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:34px;letter-spacing:-.5px;margin-top:22px;position:relative;overflow:hidden}
 .mono::after{content:"";position:absolute;width:70%;height:70%;right:-22%;bottom:-22%;border-radius:50%;background:rgba(255,255,255,.16)}
+.lg{width:20px;height:20px;border-radius:5px;vertical-align:-5px;margin-right:6px;background:#fff;object-fit:contain;box-shadow:0 0 0 1px rgba(20,27,60,.08)}
+.mono.logo{background:#fff;box-shadow:inset 0 0 0 1px rgba(20,27,60,.08)}
+.mono.logo::after{display:none}
+.mono.logo img{width:100%;height:100%;object-fit:contain;display:block}
 .mono.sm{width:56px;height:56px;border-radius:14px;font-size:19px;margin:0}
 .pname{font-size:18px;font-weight:800;text-align:center}
 .pmeta{width:100%;margin-top:auto;display:grid;gap:6px}
@@ -351,6 +355,7 @@ mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;bor
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script type="application/json" id="logos">__LOGOS__</script>
 <script type="application/json" id="data">__DATA__</script>
 <script type="application/json" id="chg">__CHANGES__</script>
 <script type="application/json" id="prop">__PROPOSALS__</script>
@@ -365,7 +370,8 @@ const $ = s=>document.querySelector(s);
 const esc = s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const view = $('#view');
 const ICON_SEARCH = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
-const mono = (a,sm)=>`<div class="mono${sm?' sm':''}" style="background:${a.color}" aria-hidden="true">${esc(a.mono)}</div>`;
+const LOGOS = JSON.parse(document.getElementById('logos').textContent);
+const mono = (a,sm)=>LOGOS[a.slug] ? `<div class="mono logo${sm?' sm':''}"><img src="${LOGOS[a.slug]}" alt="Logo ${esc(a.name)}" loading="lazy" decoding="async"></div>` : `<div class="mono${sm?' sm':''}" style="background:${a.color}" aria-hidden="true">${esc(a.mono)}</div>`;
 const tier = a=>`<span class="tier t${a.tier}">Tier ${a.tier}</span>`;
 const store = {get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
@@ -588,7 +594,7 @@ function rekRow(p){
       <div class="field"><label>Nama revisi (opsional)</label><input class="ed-nama" value="${esc(dr.nama??(r.nama||p.s4||''))}" ${dis}><div class="hint">Isi bila tim ingin nama lain. Slug dihitung ulang dari nama ini.</div></div>
       <div class="field"><label>Catatan tim Academy</label><textarea class="ed-cat" ${dis}>${esc(dr.catatan??(r.catatan||''))}</textarea></div>
       <div style="grid-column:1/-1;display:flex;gap:8px;align-items:center"><button class="btn ed-save" ${dis}>Simpan catatan</button><button class="btn ghost ed-close">Tutup</button></div></div></td></tr>`:'';
-  return `<tr data-key="${esc(p.key)}" class="prow st-${needReview(p)?st:'na'}"><td class="cardc"><a href="#app-${p.app}" class="after" style="text-decoration:none">${esc(a?a.name:p.app)}</a><div><span class="tab-pill">${esc(p.tab)}</span> <span class="count">#${esc(p.id)}</span></div></td>
+  return `<tr data-key="${esc(p.key)}" class="prow st-${needReview(p)?st:'na'}"><td class="cardc"><a href="#app-${p.app}" class="after" style="text-decoration:none">${LOGOS[p.app]?`<img class="lg" src="${LOGOS[p.app]}" alt="">`:''}${esc(a?a.name:p.app)}</a><div><span class="tab-pill">${esc(p.tab)}</span> <span class="count">#${esc(p.id)}</span></div></td>
     ${stepCell(1,'Awal',s1)}${stepCell(2,'Perubahan pertama',s2,baru?undefined:s1)}${c3}
     <td class="step s4"><span class="sn">4</span>${c4}${chips}${flags}</td><td class="revc">${rev}</td></tr>${editor}`;
 }
@@ -597,7 +603,7 @@ function rekapList(box,fixedApp){
   const saved=(()=>{ try{ return JSON.parse(store.get(K,'{}')); }catch(e){ return {}; } })();
   let app=fixedApp||saved.app||'', tab=saved.tab||'', show=saved.show||'ubah', q='', st=saved.st||'', limit=60, confirmBulk=false;
   const appsList=DATA.filter(a=>REK.some(p=>p.app===a.slug));
-  box.innerHTML = `${fixedApp?'':`<div class="appchips" id="rapps">${[['', 'Semua aplikasi'],...appsList.map(a=>[a.slug,a.name])].map(([k,l])=>`<button data-a="${k}" aria-pressed="${k===app}">${esc(l)} <span class="count">${(k?propOf(k):REVIEWABLE).length}</span></button>`).join('')}</div>`}
+  box.innerHTML = `${fixedApp?'':`<div class="appchips" id="rapps">${[['', 'Semua aplikasi'],...appsList.map(a=>[a.slug,a.name])].map(([k,l])=>`<button data-a="${k}" aria-pressed="${k===app}">${k&&LOGOS[k]?`<img class="lg" src="${LOGOS[k]}" alt="">`:''}${esc(l)} <span class="count">${(k?propOf(k):REVIEWABLE).length}</span></button>`).join('')}</div>`}
     <div id="rrum"></div><div id="snote"></div>
     <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="rq" type="search" placeholder="Cari nama di tahap mana pun, slug, #id..." aria-label="Cari card"></div>
       <div class="seg" role="group" aria-label="Saring tab">${['','Tryout','Latsol','Course'].map(k=>`<button data-t="${k}" aria-pressed="${k===tab}">${k||'Semua tab'}</button>`).join('')}</div>

@@ -9,6 +9,7 @@ const rd = (p) => readFileSync(join(root, p), 'utf8');
 const js = (p) => rd(p).replace(/<\//g, '<\\/');
 
 let body = rd('template.html')
+  .replace('__LOGOS__', () => js('data/logos.json'))
   .replace('__DATA__', () => js('data/data.json'))
   .replace('__CHANGES__', () => js('data/changes.json'))
   .replace('__PROPOSALS__', () => js('data/rekap.json'))
