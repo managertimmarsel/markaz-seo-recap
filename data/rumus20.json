@@ -1,0 +1,412 @@
+{
+ "cerebrum": {
+  "head": "Cerebrum:",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "Gunakan kata Tryout, tidak perlu ada kata SMA",
+     "Tryout TKA + Bab / Sub Bab + Tahun",
+     "Tryout UTBK + Bab / Sub Bab + Tahun"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Soal UTBK + Bab / Sub Bab + Tahun",
+     "- Soal TKA + Bab / Sub Bab + Tahun",
+     "",
+     "tidak perlu ada kata Latihan di depannya"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Materi TKA",
+     "- Materi UTBK"
+    ]
+   }
+  ]
+ },
+ "jadiasn": {
+  "head": "JadiASN",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Tryout SKD",
+     "- Tryout SKB",
+     "- Tryout TIU",
+     "- Tryout TWK",
+     "- Tryout TKP",
+     "- Tryout SKB",
+     "- Tryout PPPK",
+     "- Tryout Gratis",
+     "- Tes Toefl CPNS",
+     "- Tes Psikotes CPNS",
+     "- Tes Psikotes CPNS"
+    ]
+   },
+   {
+    "h": "Latsol (Sudah Benar)",
+    "lines": [
+     "- Rumus: Soal TKP + Bab / Sub bab + Tahun"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Materi TWK CPNS",
+     "- Kisi-kisi CPNS",
+     "- Panduan Seleksi CPNS",
+     "- Rumus: Materi + Bab / Sub bab + tahun"
+    ]
+   }
+  ]
+ },
+ "jadibumn": {
+  "head": "JadiBUMN",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "Gunakan Kata Tes di awal jika tidak ada subtest yang disingkat",
+     "- untuk yang sebelumnya TKB BUMN \"Teknik Elektro\" kemudian diganti menjadi \"Soal Listrik TKB BUMN Teknik Elektro\" seharusnya tetap menjadi Tryout TKB BUMN Teknik Elektro. Sama halnya yang sebelumnya TKB BUMN \"Teknik dan Infrastruktur\" ada perubahan menjadi \"Tes Kemampuan Bidan BUMN Teknik dan Infrastruktur\" seharusnya yang benar menjadi \"Tryout TKB BUMN Teknik dan Infrastruktur\"",
+     "- Yang ada psikotes depannya menjadi \"Tes Psikotes\""
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Tidak pakai kata latihan didepannya",
+     "- Langsung pakai kata Soal"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- kalau ada yang challenge tidak perlu diganti dan diperbaiki, tambahkan saja kata \"Tingkat\" sebelum \"SMA/D3-S2\"",
+     "- Tidak ada kata \"Contoh\"",
+     "- Langsung gunakan Kata \"Materi\" di awalannya"
+    ]
+   }
+  ]
+ },
+ "jadipolisi": {
+  "head": "JadiPOLISI",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan Kata Tes sebagai ganti \"Tryout\""
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Gunakan kata \"Soal\" didepan",
+     "- kalau ada tahunnya tetap diletakan dibelakang",
+     "- Tambahkan kata Polri diakhir. Contoh: \"Soal Tes Kecermatan Angka Hilang Polri\"",
+     "- Kalau mau ada kata \"New\" gunakan kata \"Terbaru\" atau tahun sekarang yaitu \"2026\" untuk menandakan soal baru",
+     "- Jangan ada kata \"Latihan\""
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Kata depan gunakan kata \"materi\"",
+     "- Instansi di belakang",
+     "- Rumus: Materi + Bab/sub Bab/Tahapan + Instansi + Tahun (jika ada)",
+     "- Contoh: Materi Tes Jasmani Akpol 2026",
+     "- Contoh: Materi Tes Kesehatan Tahap 2 Polri"
+    ]
+   }
+  ]
+ },
+ "jadiprajurit": {
+  "head": "JadiPRAJURIT",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata Tes tidak perlu tryout"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Soal Tes",
+     "- Soal Psikotes"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Kata depan materi"
+    ]
+   }
+  ]
+ },
+ "jadibeasiswa": {
+  "head": "JadiBeasiswa",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Depan kalimat gunakan Tryout",
+     "- Sub test disingkat misal Tes Bakat Skolastik ubah menjadi TBS",
+     "baru di deskripsi di sebutkan TEs Bakat Skolastik"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Sudah benar pakai Soal di kalimat depan",
+     "- Tetapkan rumus untuk ini"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus: Materi + Bab/sub bab + LPDP + Tahun (jika ada)",
+     "- Contoh:",
+     "Sebelumnya: Materi TIU (Tes Intelegensi Umum)",
+     "seharusnya: Materi TIU LPDP",
+     "baru di deskripsi di jabarkan kepanjangan TIU",
+     "",
+     "- Contoh:",
+     "Sebelumnya: Materi Penalaran Verbal",
+     "Seharusnya: Materi Penalaran Verbal LPDP",
+     "",
+     "- Contoh:",
+     "Sebelumnya: Materi SJT (Situational Judgement Test)",
+     "Seharusnya: Materi SJT LPDP",
+     "baru di deskripsi dijabarkan kepanjangan SJT dan disebutkan dengan kata Situational Judgement Test"
+    ]
+   }
+  ]
+ },
+ "jadisekdin": {
+  "head": "JadiSEKDIN",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Kata \"Tryout\" Ganti menjadi kata \"Tes\""
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Kalimat awal \"Soal\" lalu diikuti Bab nya dulu setelah itu sub bab dan tahun jika ada",
+     "- Contohnya: sebelumnya ditulis \"Soal Deret Angka TIU\" seharusnya ditulis menjadi \"Soal TIU Deret Angka\""
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus: Materi + Bab + Sub Bab + Instansi"
+    ]
+   }
+  ]
+ },
+ "jagotpa": {
+  "head": "JagoTPA",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan Kata \"Tryout\" bukan \"Tes atau Simulasi\""
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal TPA + Bab/Sub bab + Tahun (jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi TPA + Bab/Sub bab + Tahun (jika ada)"
+    ]
+   }
+  ]
+ },
+ "toefl-academy": {
+  "head": "TOEFL Academy",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Kata tryout ganti menjadi \"Tes\"",
+     "- Rumusnya jika itu paket berdiri sendiri dan tanpa ada nama khusus. Contoh Tryout Toefl diganti menjadi Tes TOEFL atau Tes TOEFL Gratis",
+     "- Kalau emang nama paket seperti starter test, boester test, ace test, tidak perlu diganti tetapi hanya dijelaskan tingkat kesulitan tesnya pada di deskripsi"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal TOEFL + Bab/sub bab + tahun (jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi TOEFL + Bab/sub bab + tahun (jika ada)"
+    ]
+   }
+  ]
+ },
+ "jadiojk": {
+  "head": "JadiOJK",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata \"Tryout\" di depannya",
+     "- Tapi kalua ada toefl pakai kata \"Tes TOEFL\""
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal OJK + Bab/sub bab + tahun (jika ada)",
+     "- Contoh",
+     "Sebelumnya: Soal Reading Comprehension OJK",
+     "Setelahnya: Soal OJK Reading Comprehension"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi OJK + Bab/sub bab + tahun (jika ada)",
+     "- Contoh",
+     "Sebelumnya: Materi Tes Kemampuan Dasar OJK PCAM 9",
+     "Setelahnya: Materi OJK Tes Kemampuan Dasar OJK PCAM 9"
+    ]
+   }
+  ]
+ },
+ "jadipcpm": {
+  "head": "JadiPCPM",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- KAta Tryout di depan",
+     "- Rumus: Tryout PCPM BI (39/40/41) + Bab / Tahapan",
+     "- Contoh :",
+     "1. Tryout PCPM BI 41 Tahap 2",
+     "2. Tryout PCPM BI 39 Tes Potesi Dasar"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal PCPM BI (39/40/41) + Bab / Tahapan"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi PCPM BI (39/40/41) + Bab / Tahapan"
+    ]
+   }
+  ]
+ },
+ "jadippg": {
+  "head": "JadiPPG",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata tryout"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal PPG + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi PPG + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   }
+  ]
+ },
+ "jadipppk": {
+  "head": "JadiPPPK",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata tryout"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal PPPK + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi PPPK + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   }
+  ]
+ },
+ "jagoukp": {
+  "head": "JagoUKP",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata tryout",
+     "- Rumus: Tryout UKP + Bab / Sub Bab / Tingkatan + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal UKP + Bab / Sub Bab / Tingkatan + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi UKP + Bab / Sub Bab / Tingkatan + Tahun (Jika ada)"
+    ]
+   }
+  ]
+ },
+ "psikoteskerja": {
+  "head": "Psikotes Kerja",
+  "groups": [
+   {
+    "h": "Tryout",
+    "lines": [
+     "- Gunakan kata tes bukan tryout",
+     "- Rumus : Tes Psikotes + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Latsol",
+    "lines": [
+     "- Rumus : Soal Psikotes+ Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   },
+   {
+    "h": "Course",
+    "lines": [
+     "- Rumus : Materi Psikotes + Bab / Sub Bab + Tahun (Jika ada)"
+    ]
+   }
+  ]
+ }
+}

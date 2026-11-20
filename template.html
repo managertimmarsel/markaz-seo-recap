@@ -1,0 +1,933 @@
+<title>Markaz SEO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: dashboard Markaz — sidebar navy tetap di kiri, area kerja abu terang dengan grid kartu platform; tiap aplikasi membuka laporan card SEO-nya. */
+:root{
+  --bg:#f3f4f8; --surface:#ffffff; --surface-2:#f7f8fb; --line:#e3e6ee; --fg:#1d2236; --muted:#6a7189;
+  --side:#141b3c; --side-2:#232b52; --side-fg:#e7e9f3; --side-muted:#9aa1c2;
+  --accent:#2f5bd3; --accent-soft:#e6ecfb; --ok:#1f8a4c; --ok-soft:#e3f4ea; --warn:#b86a00; --warn-soft:#fbf0dc; --bad:#c62f2f; --bad-soft:#fbe6e6;
+  --t1:#e53935; --t2:#b5481b; --t3:#77761e;
+  --shadow:0 1px 2px rgba(20,27,60,.06),0 4px 14px rgba(20,27,60,.06);
+  --f-ui:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1324; --surface:#171c33; --surface-2:#1c2240; --line:#2a3155; --fg:#e8eaf4; --muted:#9aa1bf;
+  --side:#0b0f22; --side-2:#1b2247; --accent:#7d9cf2; --accent-soft:#232d55; --ok:#5cc98a; --ok-soft:#163626; --warn:#e8a647; --warn-soft:#3a2c12; --bad:#f07a7a; --bad-soft:#3c1c1f;
+  --t1:#e5484d; --t2:#c9612f; --t3:#9a9832; --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1324; --surface:#171c33; --surface-2:#1c2240; --line:#2a3155; --fg:#e8eaf4; --muted:#9aa1bf;
+  --side:#0b0f22; --side-2:#1b2247; --accent:#7d9cf2; --accent-soft:#232d55; --ok:#5cc98a; --ok-soft:#163626; --warn:#e8a647; --warn-soft:#3a2c12; --bad:#f07a7a; --bad-soft:#3c1c1f;
+  --t1:#e5484d; --t2:#c9612f; --t3:#9a9832; --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-ui);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--side)}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{display:flex;min-height:100%}
+
+/* sidebar */
+.side{position:fixed;top:0;bottom:0;left:0;width:290px;background:var(--side);color:var(--side-fg);display:flex;flex-direction:column;z-index:50;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);transition:transform .25s ease}
+.side-head{display:flex;align-items:center;gap:12px;padding:20px 18px 18px}
+.logo{width:40px;height:40px;flex:none}
+.brand{font-size:22px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand b{font-weight:800;color:#8fb0ff}
+.hamb{margin-left:auto;background:none;border:0;padding:6px;border-radius:8px;cursor:pointer;color:var(--side-fg)}
+.hamb:hover{background:var(--side-2)}
+.side-body{overflow-y:auto;padding:0 12px 24px;flex:1}
+.plat-btn{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--side-2);border:0;border-radius:6px;padding:14px 16px;font-weight:800;font-size:16px;cursor:pointer;color:var(--side-fg)}
+.plat-menu{margin-top:6px;background:var(--side-2);border-radius:6px;padding:6px;display:grid;gap:2px}
+.plat-menu button{background:none;border:0;text-align:left;padding:8px 10px;border-radius:5px;cursor:pointer;color:var(--side-fg);display:flex;align-items:center;gap:10px;font-size:14px}
+.plat-menu button:hover{background:rgba(255,255,255,.07)}
+.side-search{margin:16px 0 8px;position:relative}
+.side-search input{width:100%;border:0;border-radius:999px;padding:11px 14px 11px 42px;background:#fff;color:#1d2236;font-size:15px}
+.side-search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#2f5bd3}
+.side-label{font-size:13px;font-weight:800;letter-spacing:1.2px;color:var(--side-fg);margin:22px 6px 8px;text-transform:uppercase}
+.nav{display:grid;gap:2px}
+.nav a,.nav button.grp{display:flex;align-items:center;gap:14px;padding:11px 8px;border-radius:6px;text-decoration:none;color:var(--side-fg);font-size:16px;background:none;border:0;width:100%;cursor:pointer;text-align:left}
+.nav a:hover,.nav button.grp:hover{background:rgba(255,255,255,.06)}
+.nav a.on{background:var(--side-2);font-weight:700}
+.nav svg{flex:none;color:var(--side-muted)}
+.nav a.on svg{color:#8fb0ff}
+.nav .chev{margin-left:auto;transition:transform .2s}
+.nav button.grp[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.sub{display:grid;gap:1px;padding:2px 0 6px 38px}
+.sub a{font-size:14px;padding:7px 8px;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.sub .cnt{margin-left:auto;font-size:12px;color:var(--side-muted);font-variant-numeric:tabular-nums}
+.side-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:var(--side-muted)}
+
+/* main */
+.main{flex:1;min-width:0;margin-left:290px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1640px;margin:0 auto;padding-block:0 48px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;align-items:center;gap:14px;padding:18px 0 14px}
+.top h1{font-size:26px;font-weight:700;margin:0;text-wrap:balance}
+.crumb{font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumb a{color:var(--accent);text-decoration:none;font-weight:700}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.icon-btn{background:none;border:0;padding:8px;border-radius:50%;cursor:pointer;color:var(--fg);display:grid;place-items:center}
+.icon-btn:hover{background:var(--surface)}
+.avatar{width:44px;height:44px;border-radius:50%;background:#f3b5b5;display:grid;place-items:center;color:#d85b5b;flex:none}
+.menu-btn{display:none}
+.datechip{font-size:12px;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+
+/* controls */
+.searchbox{position:relative;max-width:390px;flex:1 1 260px}
+.searchbox input{width:100%;border:1px solid transparent;background:var(--surface);border-radius:999px;padding:12px 16px 12px 46px;box-shadow:var(--shadow);font-size:15px}
+.searchbox input:focus{border-color:var(--accent);outline:none}
+.searchbox svg{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:4px 0 22px}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+select.sel{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px}
+
+/* platform grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:24px}
+.pcard{position:relative;background:var(--surface);border-radius:10px;box-shadow:var(--shadow);padding:22px 18px 18px;display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;color:var(--fg);min-height:265px;transition:transform .15s ease,box-shadow .15s ease;border:1px solid transparent}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(20,27,60,.14)}
+.pcard.none{opacity:.82}
+.tier{position:absolute;top:12px;right:12px;font-size:13px;font-weight:700;color:#fff;padding:3px 10px;border-radius:4px}
+.tier.t1{background:var(--t1)} .tier.t2{background:var(--t2)} .tier.t3{background:var(--t3)}
+.mono{width:104px;height:104px;border-radius:24px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:34px;letter-spacing:-.5px;margin-top:22px;position:relative;overflow:hidden}
+.mono::after{content:"";position:absolute;width:70%;height:70%;right:-22%;bottom:-22%;border-radius:50%;background:rgba(255,255,255,.16)}
+.mono.sm{width:56px;height:56px;border-radius:14px;font-size:19px;margin:0}
+.pname{font-size:18px;font-weight:800;text-align:center}
+.pmeta{width:100%;margin-top:auto;display:grid;gap:6px}
+.pmeta .row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pbar{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden;display:flex}
+.pbar i{display:block;height:100%}
+.pbar .a{background:var(--ok)} .pbar .b{background:var(--warn)}
+.ptag{font-size:12px;font-weight:700;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:4px 10px;text-align:center}
+
+/* panels */
+.panel{background:var(--surface);border-radius:10px;box-shadow:var(--shadow);padding:22px;min-width:0}
+.panel + .panel{margin-top:20px}
+.panel h2{font-size:19px;margin:0 0 4px;text-wrap:balance}
+.panel h3{font-size:16px;margin:22px 0 8px}
+.panel h4{font-size:14px;margin:16px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.panel p{margin:6px 0;max-width:80ch}
+.lead{color:var(--muted);margin:0 0 16px}
+.hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hero .t{min-width:0;flex:1}
+.hero h2{font-size:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.chip.mono-t{font-family:var(--f-mono);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+.stat{background:var(--surface-2);border-radius:8px;padding:14px 16px;border:1px solid var(--line)}
+.stat .k{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.stat .v{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
+.stat .v.ok{color:var(--ok)} .stat .v.warn{color:var(--warn)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:22px 0 18px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 14px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--accent);border-color:var(--accent)}
+
+/* tables */
+.tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:800;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.slug{font-family:var(--f-mono);font-size:12.5px;color:var(--accent);word-break:break-all}
+.kw{font-family:var(--f-mono);font-size:12.5px;background:var(--accent-soft);color:var(--fg);padding:2px 7px;border-radius:5px;display:inline-block}
+.before{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 50%,transparent);font-size:13px}
+.after{font-weight:700}
+.arrow{color:var(--muted);font-size:12px;margin:0 2px}
+.st{font-size:12px;font-weight:800;border-radius:999px;padding:3px 9px;white-space:nowrap;display:inline-block}
+.st.ok{background:var(--ok-soft);color:var(--ok)} .st.skip{background:var(--warn-soft);color:var(--warn)} .st.info{background:var(--accent-soft);color:var(--accent)} .st.bad{background:var(--bad-soft);color:var(--bad)}
+.tab-pill{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+tr.rowx{cursor:pointer}
+tr.rowx:hover td{background:var(--surface-2)}
+tr.rowx[aria-expanded="true"] td{background:var(--accent-soft)}
+tr.detail td{background:var(--surface-2);padding:16px 18px}
+.dgrid{display:grid;grid-template-columns:150px 1fr;gap:10px 16px;font-size:14px}
+.dgrid .l{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding-top:2px}
+.len{font-family:var(--f-mono);font-size:11.5px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
+.len.ok{background:var(--ok-soft);color:var(--ok)} .len.warn{background:var(--warn-soft);color:var(--warn)}
+.copy{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700;cursor:pointer;margin-left:6px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* chart */
+.chart{display:grid;gap:10px;margin-top:8px}
+.crow{display:grid;grid-template-columns:130px 1fr 92px;gap:12px;align-items:center;font-size:14px}
+.crow a{font-weight:700;text-decoration:none}
+.crow a:hover{color:var(--accent)}
+.ctrack{height:16px;background:var(--surface-2);border-radius:4px;position:relative;overflow:hidden}
+.ctrack i{position:absolute;top:0;bottom:0;border-radius:4px}
+.ctrack .a{background:var(--ok)} .ctrack .b{background:var(--warn)}
+.cval{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right;font-size:13px}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* tools */
+.tool{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field label{display:block;font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:10px 12px;font-size:14px}
+.field textarea{resize:vertical;min-height:84px}
+.out{font-family:var(--f-mono);font-size:14px;background:var(--surface-2);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;min-height:44px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.meter{height:8px;border-radius:99px;background:var(--surface-2);position:relative;margin-top:8px;overflow:hidden;border:1px solid var(--line)}
+.meter .zone{position:absolute;top:0;bottom:0;background:var(--ok-soft)}
+.meter .fill{position:absolute;top:0;bottom:0;left:0;background:var(--accent);opacity:.75}
+.hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+ol.steps{margin:8px 0 0;padding-left:22px;display:grid;gap:6px;max-width:80ch}
+.prose-list{margin:6px 0;padding-left:20px;display:grid;gap:4px;max-width:85ch}
+
+.scrim{display:none}
+@media (max-width:1000px){
+  .side{transform:translateX(-100%)}
+  body.nav-open .side{transform:none}
+  body.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(10,14,30,.45);z-index:40}
+  .main{margin-left:0}
+  .menu-btn{display:grid}
+  .tool{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .top h1{font-size:21px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .pcard{min-height:220px;padding:16px 12px}
+  .mono{width:76px;height:76px;font-size:25px;border-radius:18px;margin-top:20px}
+  .pname{font-size:15px}
+  .datechip,.avatar{display:none}
+  .crow{grid-template-columns:96px 1fr 70px}
+  .dgrid{grid-template-columns:1fr}
+  .panel{padding:16px}
+}
+/* perubahan */
+.nbadge{margin-left:auto;font-size:11.5px;font-weight:800;background:#e5484d;color:#fff;border-radius:999px;padding:1px 8px;font-variant-numeric:tabular-nums}
+.banner{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--surface);border-left:4px solid var(--bad);border-radius:10px;box-shadow:var(--shadow);padding:16px 20px;margin:0 0 22px;text-decoration:none;color:var(--fg)}
+.banner:hover{box-shadow:0 10px 26px rgba(20,27,60,.14)}
+.banner b{font-size:16px}
+.banner .go{margin-left:auto;font-weight:800;color:var(--accent);white-space:nowrap}
+.pchg{font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 9px;text-align:center;background:var(--bad-soft);color:var(--bad)}
+.pchg.zero{background:var(--ok-soft);color:var(--ok)}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:18px}
+.cat{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;text-align:left;display:grid;gap:4px;border-top:3px solid var(--line)}
+.cat:hover{border-color:var(--accent)}
+.cat[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:-1px}
+.cat .n{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.cat .t{font-weight:800;font-size:14px}
+.cat .d{font-size:12.5px;color:var(--muted)}
+.cat.bad{border-top-color:var(--bad)} .cat.bad .n{color:var(--bad)}
+.cat.skip{border-top-color:var(--warn)} .cat.skip .n{color:var(--warn)}
+.cat.info{border-top-color:var(--accent)} .cat.info .n{color:var(--accent)}
+.cat.ok{border-top-color:var(--ok)} .cat.ok .n{color:var(--ok)}
+.mx td.num a{text-decoration:none;font-weight:800;display:block}
+.mx td.num a:hover{color:var(--accent)}
+.mx td.zero{color:var(--line)}
+.yr{font-size:11px;font-weight:800;background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+.find{display:grid;gap:10px;margin:8px 0 0;padding:0;list-style:none;max-width:110ch}
+.find li{padding:12px 14px;background:var(--surface-2);border-radius:8px;border-left:3px solid var(--accent)}
+.find li b{display:block;margin-bottom:2px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
+.vs{display:grid;gap:2px}
+.vs .lab{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+/* rekap 4 tahap */
+.namebox{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 14px}
+.namebox label{font-weight:800;font-size:13px}
+.namebox input{flex:1 1 220px;max-width:320px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;background:var(--surface);color:var(--fg)}
+.appchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.appchips button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--fg)}
+.appchips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.appchips button[aria-pressed="true"] .count{color:#fff;opacity:.85}
+.rumus20{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:14px 16px;margin-bottom:16px}
+.rumus20 .rh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.rcol{background:var(--surface);border-radius:8px;padding:12px 14px;border:1px solid var(--line)}
+.rt{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin-bottom:6px}
+.rln{font-size:13.5px;margin:2px 0}
+.rli{font-size:13.5px;margin:3px 0;padding-left:14px;position:relative}
+.rli::before{content:"";position:absolute;left:3px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.rsp{height:6px}
+.legend4{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.legend4 b{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);font-size:11px;color:var(--fg);margin-right:4px}
+.legend4 .hl b{background:var(--accent);color:#fff;border-color:var(--accent)}
+mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;border-radius:3px;padding:0 2px}
+.rtab td.step{position:relative;font-size:13.5px;min-width:150px}
+.rtab .sn{display:none}
+.rtab td.s4{background:color-mix(in srgb,var(--accent) 6%,transparent);min-width:240px}
+.rtab th.h4{color:var(--accent)}
+.rtab .s4v{font-weight:800;font-size:14.5px}
+.rtab .same{color:var(--muted);font-style:italic;font-size:12.5px}
+.meta4{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rtab tr.st-setuju>td:first-child{box-shadow:inset 3px 0 0 var(--ok)}
+.rtab tr.st-tolak>td:first-child{box-shadow:inset 3px 0 0 var(--bad)}
+.rtab tr.st-revisi>td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+@media (max-width:860px){
+  .rtab thead{display:none}
+  .rtab,.rtab tbody,.rtab tr,.rtab td{display:block;width:100%}
+  .rtab tr.prow{border-bottom:1px solid var(--line);padding:8px 0}
+  .rtab td{border:0;padding:6px 12px}
+  .rtab td.step{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;min-width:0}
+  .rtab td.step>*:not(.sn){grid-column:2}
+  .rtab .sn{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);font-size:11px;font-weight:800;grid-row:1/span 4}
+  .rtab td.s4 .sn{background:var(--accent);color:#fff;border-color:var(--accent)}
+}
+/* usulan */
+.banner.info{border-left-color:var(--accent);margin-top:-10px}
+.btn{border:0;background:var(--accent);color:#fff;font-weight:800;font-size:13px;border-radius:999px;padding:8px 16px;cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--fg);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.warnbtn{background:var(--warn);color:#fff;border-color:var(--warn)}
+.linkbtn{background:none;border:0;padding:0;margin-top:8px;color:var(--accent);font-weight:700;font-size:12.5px;cursor:pointer;display:block}
+.rv{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.rvb{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:800;cursor:pointer;color:var(--muted)}
+.rvb:disabled{cursor:not-allowed;opacity:.55}
+.rvb.setuju[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.rvb.revisi[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.rvb.tolak[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:#fff}
+.rnote{margin-top:6px;font-size:12.5px;background:var(--surface-2);border-radius:6px;padding:6px 8px;white-space:pre-wrap}
+.chip.rule{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.flags{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--warn)}
+.ptab tr.st-setuju>td:first-child{box-shadow:inset 3px 0 0 var(--ok)}
+.ptab tr.st-tolak>td:first-child{box-shadow:inset 3px 0 0 var(--bad)}
+.ptab tr.st-revisi>td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.note{font-size:13px;background:var(--accent-soft);border-radius:8px;padding:10px 12px;margin:0 0 14px}
+.note.warn{background:var(--warn-soft);color:var(--warn)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;z-index:90;max-width:calc(100vw - 32px)}
+.decide .seg button:disabled{cursor:not-allowed}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="app">
+  <aside class="side" id="side" aria-label="Navigasi">
+    <div class="side-head">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="none" stroke="#e7e9f3" stroke-width="2.4" stroke-dasharray="4 3"/><circle cx="20" cy="20" r="9.5" fill="#2f5bd3"/><path d="M15.5 23.5v-7l4.5 4 4.5-4v7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="11" r="2.4" fill="#ee9a4f"/><circle cx="7" cy="28" r="2" fill="#5cc98a"/></svg>
+      <div class="brand">Markaz <b>SEO</b></div>
+      <button class="hamb" id="hamb" aria-label="Tutup menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M10 18h10"/></svg></button>
+    </div>
+    <div class="side-body">
+      <button class="plat-btn" id="platBtn" aria-expanded="false" aria-controls="platMenu"><span id="platLabel">Platform</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="plat-menu" id="platMenu" hidden></div>
+      <div class="side-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="menuSearch" type="search" placeholder="Search menu..." aria-label="Cari menu"></div>
+
+      <div class="side-label">Laporan SEO</div>
+      <nav class="nav" id="navMain">
+        <a href="#platform" data-v="platform" data-label="pilih platform"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Pilih Platform</a>
+        <a href="#perubahan" data-v="perubahan" data-label="perubahan 19 nov cek ulang sinkron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M12 8v4l3 2"/></svg>Perubahan 19 Nov<span class="nbadge" id="chgBadge"></span></a>
+        <a href="#meeting" data-v="meeting" data-label="catatan meeting 20 nov keputusan ojk tryout sekdin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3h8l4 4v14H4V3h4z"/><path d="M8 11h8M8 15h8M8 7h4"/></svg>Catatan Meeting</a>
+        <a href="#rekap" data-v="rekap" data-label="rekap nama 4 tahap revisi 20/11 usulan tinjau academy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Rekap Nama 20/11<span class="nbadge" id="propBadge"></span></a>
+        <a href="#rumus20" data-v="rumus20" data-label="rumus revisi 20/11 penamaan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Rumus Revisi 20/11</a>
+        <a href="#ringkasan" data-v="ringkasan" data-label="ringkasan rekap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Ringkasan</a>
+        <a href="#rumus" data-v="rumus" data-label="rumus seo nama slug keyword"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></svg>Rumus SEO</a>
+        <a href="#cek" data-v="cek" data-label="cek isian alat slug meta"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Cek Isian</a>
+        <a href="#kendala" data-v="kendala" data-label="kendala tindak lanjut"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>Kendala &amp; Tindak Lanjut</a>
+      </nav>
+
+      <div class="side-label">Aplikasi</div>
+      <nav class="nav" id="navApps"></nav>
+    </div>
+    <div class="side-foot">Data Markaz Cerehub · Ahrefs ID · laporan 2–11 Nov, cek ulang 19 Nov 2026</div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <div class="wrap">
+      <header class="top">
+        <button class="icon-btn menu-btn" id="openNav" aria-label="Buka menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <div style="min-width:0">
+          <div class="crumb" id="crumb"></div>
+          <h1 id="title">Pilih Platform</h1>
+        </div>
+        <div class="top-actions">
+          <span class="datechip">Laporan 2–11 Nov · Cek ulang 19 Nov 2026</span>
+          <button class="icon-btn" id="themeBtn" aria-label="Ganti tema"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+          <div class="avatar" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.5"/><path d="M3 21c1-4.5 4.6-7 9-7s8 2.5 9 7z"/></svg></div>
+        </div>
+      </header>
+      <section id="view"></section>
+    </div>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script type="application/json" id="data">__DATA__</script>
+<script type="application/json" id="chg">__CHANGES__</script>
+<script type="application/json" id="prop">__PROPOSALS__</script>
+<script type="application/json" id="meet">__MEETING__</script>
+<script type="application/json" id="rum">__RUMUS__</script>
+<script>
+(function(){
+const DATA = JSON.parse(document.getElementById('data').textContent).apps;
+const BY = Object.fromEntries(DATA.map(a=>[a.slug,a]));
+const DONE = DATA.filter(a=>a.done);
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const view = $('#view');
+const ICON_SEARCH = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+const mono = (a,sm)=>`<div class="mono${sm?' sm':''}" style="background:${a.color}" aria-hidden="true">${esc(a.mono)}</div>`;
+const tier = a=>`<span class="tier t${a.tier}">Tier ${a.tier}</span>`;
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+const TOT = DONE.reduce((t,a)=>({aktif:t.aktif+a.stats.aktif,opt:t.opt+a.stats.opt,skip:t.skip+a.stats.skip}),{aktif:0,opt:0,skip:0});
+
+const RUMUS_UMUM = [
+ ['Nama Tryout','Tryout + ujian/tes + konteks (instansi, program, jalur) + pembeda (tahun, angkatan, Tahap N, Gratis)','Tryout SKD CPNS 2027; Tryout PCPM BI 41 Tahap 2'],
+ ['Nama Latsol','Soal + keyword topik + label tes atau instansi (+ tahun bila ada seri tahunan); awalan "Latsol" tidak dipakai','Soal Deret Angka TIU; Soal TWK Nasionalisme 2026'],
+ ['Nama Course','Materi + tes/topik + konteks ujian, tanpa tahun; halaman info boleh memakai judul keyword (Cara Daftar, Syarat, Apa Itu)','Materi TKP CPNS; Cara Daftar OJK PCAM dan PCT'],
+ ['URL Slug','"/" + Nama SEO huruf kecil; spasi jadi "-"; buang tanda baca, "&", isi kurung; angka Romawi jadi angka; pembeda seri tetap ada','/soal-twk-nasionalisme-2026; /materi-rikkes-tni-tahap-2'],
+ ['Keyword','Satu frasa dari Ahrefs (ID) dengan volume > 0, intent sesuai halaman, belum dipakai card atau halaman lain di domain yang sama','soal deret angka; tes psikologi tni ad']];
+const LANGKAH = ['Tarik kandidat dari Ahrefs (Keywords Explorer + Organic Keywords domain aplikasi, country ID, mode subdomains).',
+ 'Buang kandidat bervolume 0 atau tanpa data. Jika tidak ada yang tersisa, card dilewati dan dicatat.',
+ 'Buang kandidat yang sudah ranking lewat beranda, halaman fitur, materi, atau artikel blog di domain yang sama.',
+ 'Buang kandidat yang sudah dipakai card lain di aplikasi yang sama.',
+ 'Pilih yang intent-nya cocok (soal / tryout / materi) dengan volume tertinggi.',
+ 'Seri tahunan atau angkatan: pakai varian bertahun bila berdata (JadiBeasiswa, JadiPCPM, JadiSekdin); jika tidak, satu keyword tanpa tahun untuk seluruh seri dan tahun cukup di nama dan slug (JadiASN, JadiPrajurit).'];
+const KENDALA = [
+ ['Semua','Format slug belum seragam: 13 aplikasi memakai "/" di depan, JagoTPA dan JagoUKP tanpa "/". Di JadiPrajurit, SERP Preview menampilkan garis miring ganda (//tryout-…). SOP di Project masih menulis tanpa "/".','Cek URL di frontend, tetapkan satu format, samakan semua aplikasi, lalu perbarui SOP.','tinggi'],
+ ['Semua',TOT.skip+' card dilewati karena keyword tidak ada di Ahrefs atau bentrok (terbanyak: JadiPPPK 53, JadiPolisi 38, JadiPrajurit 24, JadiBUMN 22).','Tim memutuskan: biarkan kosong, pakai keyword terdekat, atau keyword manual tanpa data.','tinggi'],
+ ['JadiOJK','15 slug lama berisi "pcs" diganti "pcam". Nama kategori course "PCS 7/8" belum diubah.','Redirect 301, update internal link dan sitemap; ganti nama kategori course.','tinggi'],
+ ['JadiOJK, JadiPCPM, JadiBUMN, Cerebrum, JagoUKP','Kuota Ahrefs habis: 2 course OJK belum diisi, 102 keyword PCPM belum disegarkan, sebagian card BUMN dilewati, kanibalisasi "persiapan snbt" Cerebrum belum dicek, 3 keyword UKP belum dicek.','Lanjutkan saat kuota pulih.','sedang'],
+ ['JagoTPA','Part 2 ditolak di Data Kategori: "The selected Tipe Penilaian is invalid".','Tim teknis cek Tipe Penilaian, lalu mirror ulang.','sedang'],
+ ['JadiPrajurit, JadiSekdin, PsikotesKerja, Cerebrum','Card mitra/khusus belum dioptimasi: Rihadi Prima Pertiwi (5 card), Latsol Astra (4), Cerebrum 6 tryout event/mitra, 5 PTS, dan 4 course Salman ITB. Di JadiPolisi, card Rihadi sudah diisi dengan keyword dasar yang sama.','Putuskan apakah card mitra, PTS, dan Salman ITB ikut dioptimasi.','sedang'],
+ ['JadiPPPK, JagoTPA','Konten lintas ujian (CPNS, BUMN, PCPM, BI/OJK) aktif di aplikasi lain.','Cek apakah memang ditampilkan di aplikasi itu.','rendah'],
+ ['JadiASN, JagoUKP','Copy Tryout JadiASN di luar dokumen tim belum direview. Meta Title JagoUKP Purchase dan Liveclass 59 karakter; tab Tryout, Latsol, Course JagoUKP masih kosong.','Review copy; tambah 1 karakter; isi tab JagoUKP.','rendah']];
+
+/* ---------- perubahan 19 Nov (tarik ulang data Markaz) ---------- */
+const CHG = JSON.parse(document.getElementById('chg').textContent);
+const CAT = {
+  beda:       {t:'Nama aplikasi ≠ Data SEO', c:'bad',  d:'Card lama. Data SEO masih hasil optimasi 11 Nov, tetapi nama di Data Kategori/Data Course sekarang berbeda.', a:'Sesuaikan Data SEO dengan nama aplikasi (terutama tahun), lalu cek ulang slug, Meta Title, dan Meta Description.'},
+  baru_beda:  {t:'Card baru, Data SEO ≠ nama', c:'bad', d:'Card yang belum ada di laporan 11 Nov. Data SEO sudah diisi, tetapi nama atau tahunnya tidak sama dengan nama card.', a:'Samakan nama dan tahun di Data SEO dengan nama card; slug ikut berubah.'},
+  kosong_baru:{t:'Aktif tanpa Data SEO', c:'skip', d:'Card aktif yang tidak ada di laporan 11 Nov dan Data SEO-nya masih kosong.', a:'Isi Data SEO, atau putuskan dilewati (misalnya course lintas aplikasi).'},
+  kosong_lama:{t:'Masih kosong sejak 11 Nov', c:'skip', d:'Card yang pada 11 Nov sudah dilewati atau belum digarap, dan Data SEO-nya masih kosong. Sebagian sudah diganti nama oleh tim.', a:'Masuk antrean pengisian; pakai nama card terbaru.'},
+  nonaktif:   {t:'Dinonaktifkan', c:'info', d:'Card dari laporan 11 Nov yang sekarang berstatus Nonaktif.', a:'Tidak perlu diisi; pastikan URL lama tidak dipakai di internal link.'},
+  hilang:     {t:'Tidak ditemukan lagi', c:'info', d:'Baris laporan 11 Nov yang tidak ditemukan lagi dengan nama, slug, dan keyword yang sama.', a:'Cek apakah card diganti nama, dinonaktifkan, atau dihapus; jika URL berubah, pasang redirect 301.'},
+  baru_ok:    {t:'Card baru, sudah sinkron', c:'ok', d:'Card baru yang Data SEO-nya sudah diisi dan sama dengan nama card.', a:'Cek slug, keyword, dan panjang meta saja.'},
+  seo_update: {t:'Data SEO diperbarui tim', c:'ok', d:'Card yang Data SEO-nya diubah setelah 11 Nov dan sekarang sama dengan nama card.', a:'Tidak ada; catat sebagai perubahan resmi.'}
+};
+const CAT_ORDER = ['beda','baru_beda','kosong_baru','kosong_lama','nonaktif','hilang','baru_ok','seo_update'];
+const ACTION = new Set(['beda','baru_beda','kosong_baru','kosong_lama']);
+const cnt = it=>it.count||1;
+const CHG_ALL = []; Object.entries(CHG).forEach(([slug,v])=>v.items.forEach(it=>CHG_ALL.push({...it,app:slug})));
+const CHG_TOT = {}; CAT_ORDER.forEach(k=>CHG_TOT[k]=0); CHG_ALL.forEach(it=>CHG_TOT[it.cat]+=cnt(it));
+const chgOf = slug=>{ const o={}; CAT_ORDER.forEach(k=>o[k]=0); (CHG[slug]?.items||[]).forEach(it=>o[it.cat]+=cnt(it)); return o; };
+const needOf = slug=>{ const o=chgOf(slug); return [...ACTION].reduce((t,k)=>t+o[k],0); };
+const NEED_TOT = [...ACTION].reduce((t,k)=>t+CHG_TOT[k],0);
+const YEAR_TOT = CHG_ALL.filter(i=>i.yearOnly).length;
+const AKTIF_NOW = Object.values(CHG).reduce((t,v)=>t+v.aktif,0);
+const FINDINGS = [
+ ['Pola nama baru dari tim Academy','Banyak card diganti ke pola seragam: "Soal Tes Psikologi …" (JadiBUMN, termasuk seri KAI, dan PsikotesKerja), "Soal Tes Akademik …" dan "Soal Tes Psikologi Kecerdasan … Polri" (JadiPolisi), "Soal UTBK … 2026" dan "Tryout UTBK-SNBT …" (Cerebrum), "Tes RBB BUMN …" (Tryout JadiBUMN), "Tryout PCPM BI N Tahap 1" (JadiPCPM), "Tryout TPD/TKU PCAM …" (JadiOJK), "Tes Potensi Akademik …" (JagoTPA), serta latsol "Soal TWK/TIU … + tahun" (JadiSekdin, JadiPPPK). Data SEO masih memakai nama hasil optimasi 11 Nov.'],
+ [`${YEAR_TOT} card hanya beda tahun`,'JadiASN Tryout TIU/TKP/TWK: aplikasi 2025, Data SEO 2026. JadiPPPK Tryout #442 dan latsol baru #464–479: aplikasi 2026, Data SEO 2027. JadiSekdin latsol baru #167–184: aplikasi 2027, Data SEO 2026. Latsol TWK/TIU lama di JadiSekdin dan JadiPPPK kini memakai tahun di nama aplikasi (2026/2025), sementara Data SEO tanpa tahun. Sesuai aturan, tahun di Data SEO, slug, dan title mengikuti nama card.'],
+ ['Card baru','JadiSekdin menambah 23 latsol 2027 (#162–184; 5 TWK sudah sinkron, 17 TIU/TKP tahunnya beda) dan 11 latsol TKP/IPDN/STAN 2026 yang masih kosong. JadiPPPK menambah 16 latsol #464–479 (Data SEO terisi, tahun beda) dan 6 latsol TKP 2026 #480–485 yang kosong. JadiPrajurit menambah 18 latsol #125–143 tanpa Data SEO. JadiASN menambah 4 latsol TIU 2026 yang sudah sinkron. Cerebrum (Tryout UTBK-SNBT 2027) dan JadiOJK (Tahap 1 TPD PCAM 10) masing-masing 1 tryout baru tanpa Data SEO.'],
+ ['Card dinonaktifkan',`${CHG_TOT.nonaktif} card dari laporan 11 Nov sekarang Nonaktif: JadiPolisi 9 (8 course dan Tryout AKADEMIK TAMTAMA 2025), PsikotesKerja 5, JadiPrajurit 3 latsol Tes Akademik, JadiPPPK 3 course.`],
+ ['Data SEO yang diubah tim','JadiSekdin #129 kini "Tes Kemampuan Bahasa Inggris IPDN" (sebelumnya "Tes TOEFL IPDN") dan #157 "Soal Numerik Deret STAN" yang dulu dilewati kini terisi. Keduanya sudah sama dengan nama card.'],
+ ['Tidak ditemukan lagi','4 baris JadiASN (Tryout SKD CPNS 2027, Soal TIU Verbal Silogisme 2026, Soal TIU Numerik Soal Cerita 2026, Soal TIU Numerik Perbandingan Kuantitatif 2026) tidak ditemukan dengan data yang sama. Kemungkinan diganti nama (mis. menjadi "Soal TIU Penalaran Verbal Silogisme 2026") atau dinonaktifkan; perlu dicek manual.'],
+ ['Tanpa perubahan','TOEFL Academy sama persis dengan laporan 11 Nov. Halaman Umum JagoUKP juga tetap.']
+];
+function chgRows(list){
+  return list.map(it=>{
+    const C=CAT[it.cat], a=BY[it.app];
+    const appName = it.label ? `<div class="after">${esc(it.label)}</div>` : '<span class="count">–</span>';
+    const seo = it.seo ? `<div class="vs"><div>${esc(it.seo)}${it.yearOnly?'<span class="yr">tahun beda</span>':''}</div>${it.slug?`<span class="slug">${esc(it.slug)}</span>`:''}${it.kw?`<div><span class="kw">${esc(it.kw)}</span></div>`:''}</div>` : '<span class="count">kosong</span>';
+    let note='';
+    if(it.cat==='kosong_lama' && it.b_after && it.b_after!==it.label) note=`Nama 11 Nov: ${esc(it.b_after)}`;
+    else if(it.cat==='hilang') note=`Status 11 Nov: ${esc(it.b_status)}`;
+    else if(it.cat==='seo_update') note=`Data SEO 11 Nov: ${esc(it.b_after)}`;
+    else if(it.b_status) note=`Status 11 Nov: ${esc(it.b_status)}`;
+    if(it.count) note=`${it.count} course`;
+    return `<tr><td><a href="#app-${it.app}" class="after" style="text-decoration:none">${esc(a?a.name:it.app)}</a></td>
+      <td><span class="tab-pill">${esc(it.tab)}</span>${it.id&&it.id!=='*'?`<div class="count">#${esc(it.id)}</div>`:''}</td>
+      <td>${appName}</td><td>${seo}</td>
+      <td><span class="st ${C.c}">${esc(C.t)}</span></td><td class="count">${note}</td></tr>`;
+  }).join('');
+}
+function chgTable(id){ return `<div class="tscroll"><table><thead><tr><th>Aplikasi</th><th>Tab</th><th>Nama di aplikasi (19 Nov)</th><th>Data SEO sekarang</th><th>Kategori</th><th>Catatan</th></tr></thead><tbody id="${id}"></tbody></table></div>`; }
+function vPerubahan(){
+  const apps=DATA.filter(a=>CHG[a.slug]);
+  const maxN=Math.max(...apps.map(a=>needOf(a.slug)),1);
+  view.innerHTML = `<div class="panel"><h2>Hasil tarik ulang data Markaz, 19 Nov 2026</h2>
+    <p class="lead">Seluruh 15 aplikasi dibaca ulang lewat browser (tab Tryout, Latsol, Course, dan Umum untuk JagoUKP), lalu dibandingkan dengan laporan 2–11 Nov. Hanya dibaca; tidak ada data yang diubah di Markaz. ${NEED_TOT} card perlu ditindaklanjuti.</p>
+    <div class="stats"><div class="stat"><div class="k">Aplikasi dicek</div><div class="v">${apps.length} / ${DATA.length}</div></div><div class="stat"><div class="k">Card aktif terbaca</div><div class="v">${AKTIF_NOW.toLocaleString('id-ID')}</div></div><div class="stat"><div class="k">Perlu tindakan</div><div class="v" style="color:var(--bad)">${NEED_TOT}</div></div><div class="stat"><div class="k">Beda tahun saja</div><div class="v warn">${YEAR_TOT}</div></div><div class="stat"><div class="k">Sinkron / nonaktif</div><div class="v ok">${CHG_TOT.baru_ok+CHG_TOT.seo_update} / ${CHG_TOT.nonaktif}</div></div></div>
+    <div class="cats" id="cats">${CAT_ORDER.map(k=>`<button class="cat ${CAT[k].c}" data-k="${k}" aria-pressed="false"><span class="n">${CHG_TOT[k]}</span><span class="t">${esc(CAT[k].t)}</span><span class="d">${esc(CAT[k].d)}</span><span class="d"><b>Tindakan:</b> ${esc(CAT[k].a)}</span></button>`).join('')}</div>
+    <p class="hint" style="margin-top:10px">Klik kategori untuk menyaring daftar di bawah. Angka card aktif hari ini menghitung semua card berstatus Aktif, termasuk course lintas aplikasi, sehingga tidak sama dengan cakupan laporan 11 Nov (1.150).</p></div>
+   <div class="panel"><h2>Temuan utama</h2><ul class="find">${FINDINGS.map(f=>`<li><b>${esc(f[0])}</b>${esc(f[1])}</li>`).join('')}</ul></div>
+   <div class="panel"><h2>Per aplikasi</h2><p class="lead">Klik angka untuk melihat daftarnya. Batang = card yang perlu tindakan.</p>
+    <div class="tscroll"><table class="mx"><thead><tr><th>Aplikasi</th><th class="num">Aktif 19 Nov</th>${CAT_ORDER.map(k=>`<th class="num" title="${esc(CAT[k].d)}">${esc(CAT[k].t)}</th>`).join('')}<th style="min-width:140px">Perlu tindakan</th></tr></thead><tbody>
+    ${[...apps].sort((x,y)=>needOf(y.slug)-needOf(x.slug)).map(a=>{const o=chgOf(a.slug), n=needOf(a.slug); return `<tr><td><a href="#app-${a.slug}" class="after" style="text-decoration:none">${esc(a.name)}</a></td><td class="num">${CHG[a.slug].aktif}</td>${CAT_ORDER.map(k=>o[k]?`<td class="num"><a href="#" data-app="${a.slug}" data-k="${k}">${o[k]}</a></td>`:`<td class="num zero">0</td>`).join('')}<td><div class="ctrack" title="${n} card"><i class="b" style="left:0;width:${n/maxN*100}%;background:var(--bad)"></i></div><div class="count">${n}</div></td></tr>`}).join('')}
+    </tbody></table></div></div>
+   <div class="panel" id="dlist"><h2>Daftar perubahan</h2>
+    <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="gq" type="search" placeholder="Cari nama, slug, keyword, #id..." aria-label="Cari perubahan"></div>
+     <select class="sel" id="gapp" aria-label="Saring aplikasi"><option value="">Semua aplikasi</option>${apps.map(a=>`<option value="${a.slug}">${esc(a.name)}</option>`).join('')}</select>
+     <select class="sel" id="gcat" aria-label="Saring kategori"><option value="">Semua kategori</option><option value="__act">Perlu tindakan</option>${CAT_ORDER.map(k=>`<option value="${k}">${esc(CAT[k].t)}</option>`).join('')}</select>
+     <label class="chk"><input type="checkbox" id="gyr"> Hanya beda tahun</label><span class="count" id="gc"></span></div>
+    ${chgTable('gt')}</div>`;
+  const draw=()=>{
+    const q=$('#gq').value.trim().toLowerCase(), ap=$('#gapp').value, k=$('#gcat').value, yr=$('#gyr').checked;
+    const list=CHG_ALL.filter(i=>(!ap||i.app===ap)&&(!k||(k==='__act'?ACTION.has(i.cat):i.cat===k))&&(!yr||i.yearOnly)&&(!q||[i.label,i.seo,i.slug,i.kw,i.id,i.b_after,BY[i.app]?.name].join(' ').toLowerCase().includes(q)))
+      .sort((x,y)=>CAT_ORDER.indexOf(x.cat)-CAT_ORDER.indexOf(y.cat));
+    $('#gc').textContent=`${list.reduce((t,i)=>t+cnt(i),0)} card`;
+    $('#gt').innerHTML=chgRows(list)||`<tr><td colspan="6"><div class="empty">Tidak ada perubahan yang cocok.</div></td></tr>`;
+    view.querySelectorAll('#cats .cat').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+  };
+  ['gq','gapp','gcat','gyr'].forEach(id=>$('#'+id).addEventListener(id==='gq'?'input':'change',draw));
+  view.querySelectorAll('#cats .cat').forEach(b=>b.addEventListener('click',()=>{ $('#gcat').value=$('#gcat').value===b.dataset.k?'':b.dataset.k; draw(); $('#dlist').scrollIntoView({behavior:'smooth',block:'start'}); }));
+  view.querySelectorAll('.mx a[data-app]').forEach(x=>x.addEventListener('click',e=>{e.preventDefault(); $('#gapp').value=x.dataset.app; $('#gcat').value=x.dataset.k; $('#gyr').checked=false; $('#gq').value=''; draw(); $('#dlist').scrollIntoView({behavior:'smooth',block:'start'});}));
+  draw();
+}
+
+/* ---------- rekap nama 4 tahap + tinjauan tim Academy (revisi 20/11/2026) ---------- */
+const REK = JSON.parse(document.getElementById('prop').textContent);
+const RUM = JSON.parse(document.getElementById('rum').textContent);
+const MEET = JSON.parse(document.getElementById('meet').textContent);
+const SRC = {
+  contoh:{t:'Contoh langsung dari revisi',c:'ok'},
+  rumus:{t:'Rumus revisi 20/11',c:'info'},
+  meeting:{t:'Catatan meeting 20/11',c:'info'},
+  usulan:{t:'Rumus belum ditetapkan (usulan)',c:'skip'},
+  tetap:{t:'Sudah sesuai rumus',c:'ok'},
+  umum:{t:'Perlu keputusan tim',c:'skip'}
+};
+const ST = {menunggu:{t:'Menunggu',c:'skip'},setuju:{t:'Dipakai',c:'ok'},revisi:{t:'Revisi',c:'info'},tolak:{t:'Tidak dipakai',c:'bad'}};
+let REV={}, DEC={}, DBX=null, ME='', CANW=true, DBSTATE='loading';
+const statusOf = p=>REV[p.key]?.status||'menunggu';
+const isChange = p=>p.s4 && (p.s4!==p.seo || p.s4!==p.base);
+const needReview = p=>isChange(p) || p.src==='umum';
+const REVIEWABLE = REK.filter(needReview);
+const pendingCount = ()=>REVIEWABLE.filter(p=>statusOf(p)==='menunggu').length;
+const rekOf = slug=>REK.filter(p=>p.app===slug);
+const PROP = REVIEWABLE; const propOf = slug=>REVIEWABLE.filter(p=>p.app===slug);
+let REDRAW = null;
+try{ ME = localStorage.getItem('markaz_reviewer')||''; }catch(e){}
+function refreshStore(){ const b=$('#propBadge'); if(b) b.textContent=pendingCount(); if(REDRAW) REDRAW(); }
+const rowToRev = r=>({status:r.status||'menunggu',catatan:r.catatan||'',nama:r.nama_revisi||'',by:r.reviewer||'',at:r.updated_at||''});
+async function loadAll(){
+  const out={}; let from=0;
+  for(;;){ const {data,error}=await DBX.from('review').select('*').range(from,from+999); if(error) throw error; data.forEach(r=>out[r.key]=rowToRev(r)); if(data.length<1000) break; from+=1000; }
+  return out;
+}
+async function initStore(){
+  const C=window.MARKAZ_CONFIG||{};
+  if(!window.supabase||!C.supabaseUrl||!C.supabaseAnonKey){ DBSTATE='off'; refreshStore(); return; }
+  try{ DBX=window.supabase.createClient(C.supabaseUrl,C.supabaseAnonKey,{auth:{persistSession:false}}); }catch(e){ DBSTATE='off'; refreshStore(); return; }
+  const t=setTimeout(()=>{ if(DBSTATE==='loading'){ DBSTATE='slow'; refreshStore(); } },10000);
+  try{ REV=await loadAll(); clearTimeout(t); DBSTATE='ok'; }catch(e){ clearTimeout(t); DBSTATE='error'; }
+  refreshStore();
+  try{ DBX.channel('review-live').on('postgres_changes',{event:'*',schema:'public',table:'review'},pl=>{ const r=pl.new&&pl.new.key?pl.new:null; if(r){ REV={...REV,[r.key]:rowToRev(r)}; } else if(pl.old&&pl.old.key){ const o={...REV}; delete o[pl.old.key]; REV=o; } refreshStore(); }).subscribe(); }catch(e){}
+  setInterval(async()=>{ if(document.hidden) return; try{ REV=await loadAll(); if(DBSTATE!=='ok'){ DBSTATE='ok'; } refreshStore(); }catch(e){} },60000);
+}
+function askName(){
+  toast('Isi nama kamu dulu di kotak "Nama peninjau" di atas daftar.');
+  const el=$('#revname'); if(el){ el.focus(); el.scrollIntoView({behavior:'smooth',block:'center'}); }
+  return false;
+}
+const writeQ={};
+async function saveRev(key,patch){
+  if(!DBX||DBSTATE==='off'){ toast('Database belum tersambung, tinjauan tidak tersimpan.'); return false; }
+  if(!ME) return askName();
+  const p=REK.find(x=>x.key===key)||{};
+  const cur=REV[key]||{}; const body={status:cur.status||'menunggu',catatan:cur.catatan||'',nama:cur.nama||'',...patch,by:ME,at:new Date().toISOString()};
+  REV={...REV,[key]:body}; refreshStore();
+  const row={key,app:p.app||'',tab:p.tab||'',card_id:p.id||'',nama_saran:p.s4||'',status:body.status,catatan:body.catatan,nama_revisi:body.nama,reviewer:ME,updated_at:body.at};
+  const prev=writeQ[key]||Promise.resolve();
+  const run=prev.then(async()=>{
+    const {error}=await DBX.from('review').upsert(row,{onConflict:'key'}); if(error) throw error;
+    await DBX.from('review_log').insert({key,status:row.status,catatan:row.catatan,nama_revisi:row.nama_revisi,reviewer:ME});
+    return true;
+  }).catch(e=>{ toast('Gagal menyimpan, coba lagi.'); REV={...REV,[key]:cur}; refreshStore(); return false; });
+  writeQ[key]=run; return run;
+}
+function toast(msg){ let el=$('#toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.className='toast'; el.setAttribute('role','status'); document.body.appendChild(el);} el.textContent=msg; el.hidden=false; clearTimeout(el._t); el._t=setTimeout(()=>el.hidden=true,3200); }
+function storeNote(){
+  const nameBox=`<div class="namebox"><label for="revname">Nama peninjau</label><input id="revname" placeholder="mis. Rina (Academy)" value="${esc(ME)}" autocomplete="name"><span class="count">${ME?'Tinjauan tersimpan atas nama ini.':'Wajib diisi sebelum memberi status atau catatan.'}</span></div>`;
+  let n='';
+  if(DBSTATE==='off') n=`<div class="note warn">Database tinjauan belum tersambung. Rekap tetap bisa dibaca, tetapi status dan catatan belum bisa disimpan.</div>`;
+  else if(DBSTATE==='error') n=`<div class="note warn">Data tinjauan tidak bisa dimuat. Status yang tampil mungkin belum lengkap.</div>`;
+  else if(DBSTATE==='slow') n=`<div class="note warn">Data tinjauan belum terjangkau; status yang tampil mungkin belum terbaru.</div>`;
+  else if(DBSTATE==='loading') n=`<div class="note">Memuat status tinjauan…</div>`;
+  return n+nameBox;
+}
+document.addEventListener('change',e=>{ if(e.target&&e.target.id==='revname'){ ME=e.target.value.trim(); try{ localStorage.setItem('markaz_reviewer',ME); }catch(_){} toast(ME?`Tersimpan sebagai ${ME}.`:'Nama dikosongkan.'); refreshStore(); } });
+async function fillNames(root){}
+const fmtAt = s=>{ try{ return new Date(s).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; } };
+function diffMark(to,from){
+  const fw=new Set(String(from||'').toLowerCase().split(/\s+/));
+  return String(to).split(/(\s+)/).map(w=>/^\s+$/.test(w)||!w?w:(fw.has(w.toLowerCase())?esc(w):`<mark>${esc(w)}</mark>`)).join('');
+}
+function rumusBox(slug){
+  const r=RUM[slug]; if(!r) return '';
+  return `<div class="rumus20"><div class="rh"><b>Rumus revisi 20/11/2026 · ${esc(BY[slug]?.name||r.head)}</b><span class="count">Ditulis sesuai revisi, tanpa diubah</span></div>
+    <div class="rgrid">${r.groups.map(g=>`<div class="rcol"><div class="rt">${esc(g.h||'Catatan')}</div>${g.lines.map(l=>{ const s=l.trim(); if(!s) return '<div class="rsp"></div>'; const b=s.startsWith('- '); return `<div class="${b?'rli':'rln'}">${esc(b?s.slice(2):s)}</div>`; }).join('')}</div>`).join('')}</div></div>`;
+}
+const OPEN=new Set(), DRAFT={};
+function stepCell(n,label,val,prev,extra){
+  let body;
+  if(val===null) body='<span class="count">—</span>';
+  else if(!val) body='<span class="count">kosong</span>';
+  else if(prev!==undefined && val===prev) body=`<span class="same">sama</span>`;
+  else body=esc(val);
+  return `<td class="step s${n}"><span class="sn">${n}</span><div class="sv">${body}</div>${extra||''}</td>`;
+}
+function rekRow(p){
+  const st=statusOf(p), r=REV[p.key]||{}, a=BY[p.app], dis=(!DBX)?'disabled':'', baru=p.status11==='baru';
+  const s1 = baru?null:p.s1, s2=baru?null:p.s2, s3=p.s3||'';
+  const c3 = baru ? `<td class="step s3"><span class="sn">3</span><div class="sv">${esc(p.base)}</div><div class="count">Card baru (belum ada 11 Nov)${p.seo&&p.seo!==p.base?` · Data SEO: ${esc(p.seo)}`:''}</div></td>`
+           : (s3 ? `<td class="step s3"><span class="sn">3</span><div class="sv">${esc(s3)}</div><div class="count">Nama di aplikasi${p.seo&&p.seo!==s2?` · Data SEO: ${esc(p.seo)}`:''}</div></td>`
+                 : `<td class="step s3"><span class="sn">3</span><div class="sv"><span class="same">tetap</span></div></td>`);
+  const fin = r.nama&&r.nama!==p.s4 ? r.nama : '';
+  const c4 = p.s4 ? `<div class="sv s4v">${diffMark(p.s4,p.base)}</div>${fin?`<div class="sv"><span class="st info">revisi tim</span> ${esc(fin)}</div>`:''}
+      <div class="meta4"><span class="slug">${esc(fin?slug2(fin):p.nslug)}</span>${p.nkw?` <span class="kw">${esc(p.nkw)}</span>`:''}</div>`
+      : `<div class="sv"><span class="count">Tidak ada usulan nama</span></div>`;
+  const chips = `<div class="chips" style="margin-top:6px"><span class="st ${SRC[p.src].c}">${esc(SRC[p.src].t)}</span>${p.s4&&p.s4!==p.seo?'<span class="chip">Data SEO berubah</span>':''}${p.s4&&p.s4!==p.base?'<span class="chip">Nama aplikasi berubah</span>':''}</div>`;
+  const flags = p.flags.length?`<ul class="flags">${p.flags.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`:'';
+  const rev = needReview(p) ? `<span class="st ${ST[st].c}">${ST[st].t}</span><div class="rv" role="group" aria-label="Status tinjauan">${['setuju','revisi','tolak'].map(k=>`<button class="rvb ${k}" data-k="${k}" aria-pressed="${st===k}" ${dis}>${k==='setuju'?'Dipakai':k==='revisi'?'Revisi':'Tidak dipakai'}</button>`).join('')}</div>
+      ${r.at?`<div class="count" style="margin-top:6px">${r.by?esc(r.by)+' · ':''}${esc(fmtAt(r.at))}</div>`:''}${r.catatan?`<div class="rnote">${esc(r.catatan)}</div>`:''}
+      <button class="linkbtn ed-open">${OPEN.has(p.key)?'Tutup catatan':(r.catatan||r.nama?'Ubah catatan':'Tambah catatan')}</button>`
+      : `<span class="count">Tidak perlu tinjauan</span>`;
+  const dr=DRAFT[p.key]||{};
+  const editor = OPEN.has(p.key)?`<tr class="detail" data-ed="${esc(p.key)}"><td colspan="6"><div class="tool">
+      <div class="field"><label>Nama revisi (opsional)</label><input class="ed-nama" value="${esc(dr.nama??(r.nama||p.s4||''))}" ${dis}><div class="hint">Isi bila tim ingin nama lain. Slug dihitung ulang dari nama ini.</div></div>
+      <div class="field"><label>Catatan tim Academy</label><textarea class="ed-cat" ${dis}>${esc(dr.catatan??(r.catatan||''))}</textarea></div>
+      <div style="grid-column:1/-1;display:flex;gap:8px;align-items:center"><button class="btn ed-save" ${dis}>Simpan catatan</button><button class="btn ghost ed-close">Tutup</button></div></div></td></tr>`:'';
+  return `<tr data-key="${esc(p.key)}" class="prow st-${needReview(p)?st:'na'}"><td class="cardc"><a href="#app-${p.app}" class="after" style="text-decoration:none">${esc(a?a.name:p.app)}</a><div><span class="tab-pill">${esc(p.tab)}</span> <span class="count">#${esc(p.id)}</span></div></td>
+    ${stepCell(1,'Awal',s1)}${stepCell(2,'Perubahan pertama',s2,baru?undefined:s1)}${c3}
+    <td class="step s4"><span class="sn">4</span>${c4}${chips}${flags}</td><td class="revc">${rev}</td></tr>${editor}`;
+}
+function rekapList(box,fixedApp){
+  const K='rk'+(fixedApp||'');
+  const saved=(()=>{ try{ return JSON.parse(store.get(K,'{}')); }catch(e){ return {}; } })();
+  let app=fixedApp||saved.app||'', tab=saved.tab||'', show=saved.show||'ubah', q='', st=saved.st||'', limit=60, confirmBulk=false;
+  const appsList=DATA.filter(a=>REK.some(p=>p.app===a.slug));
+  box.innerHTML = `${fixedApp?'':`<div class="appchips" id="rapps">${[['', 'Semua aplikasi'],...appsList.map(a=>[a.slug,a.name])].map(([k,l])=>`<button data-a="${k}" aria-pressed="${k===app}">${esc(l)} <span class="count">${(k?propOf(k):REVIEWABLE).length}</span></button>`).join('')}</div>`}
+    <div id="rrum"></div><div id="snote"></div>
+    <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="rq" type="search" placeholder="Cari nama di tahap mana pun, slug, #id..." aria-label="Cari card"></div>
+      <div class="seg" role="group" aria-label="Saring tab">${['','Tryout','Latsol','Course'].map(k=>`<button data-t="${k}" aria-pressed="${k===tab}">${k||'Semua tab'}</button>`).join('')}</div>
+      <select class="sel" id="rshow" aria-label="Tampilkan"><option value="ubah">Hanya yang berubah / perlu keputusan</option><option value="semua">Semua card</option><option value="flag">Ada catatan untuk dicek</option><option value="umum">Perlu keputusan tim</option></select>
+      <select class="sel" id="rst" aria-label="Saring status"><option value="">Semua status</option>${Object.entries(ST).map(([k,s])=>`<option value="${k}">${s.t}</option>`).join('')}</select>
+      <span class="count" id="rc"></span></div>
+    <div class="bar" style="margin-top:-10px"><button class="btn ghost" id="rbulk"></button><button class="btn ghost" id="rcopy">Salin yang dipakai (untuk dieksekusi)</button></div>
+    <div class="legend4"><span><b>1</b> Awal (sebelum optimasi)</span><span><b>2</b> Perubahan pertama (laporan 2–11 Nov)</span><span><b>3</b> Revisi (nama di aplikasi, 19 Nov)</span><span class="hl"><b>4</b> Saran revisi terbaru 20/11/2026</span><span><mark>kata</mark> = kata baru dibanding nama sekarang</span></div>
+    <div class="tscroll"><table class="rtab"><thead><tr><th style="width:120px">Card</th><th>1 · Awal</th><th>2 · Perubahan pertama</th><th>3 · Revisi</th><th class="h4">4 · Saran revisi 20/11/2026</th><th style="width:210px">Status &amp; catatan Academy</th></tr></thead><tbody id="rt"></tbody></table></div>
+    <div style="text-align:center;margin-top:12px"><button class="btn ghost" id="rmore" hidden>Tampilkan lebih banyak</button></div>`;
+  $('#rshow').value=show; $('#rst').value=st;
+  const list=()=>{ const ql=q.toLowerCase();
+    return REK.filter(p=>(!app||p.app===app)&&(!tab||p.tab===tab)
+      &&(show==='semua'||(show==='ubah'&&needReview(p))||(show==='flag'&&p.flags.length)||(show==='umum'&&p.src==='umum'))
+      &&(!st||(needReview(p)&&statusOf(p)===st))
+      &&(!ql||[p.s1,p.s2,p.s3,p.seo,p.s4,p.nslug,p.id,BY[p.app]?.name,REV[p.key]?.catatan].join(' ').toLowerCase().includes(ql))); };
+  const draw=()=>{
+    $('#snote').innerHTML=storeNote();
+    $('#rrum').innerHTML=app?rumusBox(app):'';
+    const L=list(); $('#rc').textContent=`${L.length} card`;
+    $('#rt').innerHTML=L.slice(0,limit).map(rekRow).join('')||`<tr><td colspan="6"><div class="empty">Tidak ada card yang cocok.</div></td></tr>`;
+    $('#rmore').hidden=L.length<=limit; $('#rmore').textContent=`Tampilkan lebih banyak (${L.length-limit} lagi)`;
+    const pend=L.filter(p=>needReview(p)&&statusOf(p)==='menunggu'&&p.s4).length;
+    const bb=$('#rbulk'); bb.disabled=!DBX||!pend; bb.textContent=confirmBulk?`Klik lagi untuk menandai ${pend} card sebagai Dipakai`:`Tandai semua yang tampil & menunggu sebagai Dipakai (${pend})`; bb.classList.toggle('warnbtn',confirmBulk);
+    fillNames($('#rt'));
+  };
+  REDRAW=draw;
+  const remember=()=>store.set(K,JSON.stringify({app,tab,show,st}));
+  if($('#rapps')) $('#rapps').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; app=b.dataset.a; $('#rapps').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); limit=60; confirmBulk=false; remember(); draw(); });
+  box.querySelectorAll('.seg button[data-t]').forEach(b=>b.addEventListener('click',()=>{ tab=b.dataset.t; box.querySelectorAll('.seg button[data-t]').forEach(x=>x.setAttribute('aria-pressed',x===b)); limit=60; confirmBulk=false; remember(); draw(); }));
+  $('#rq').addEventListener('input',e=>{ q=e.target.value.trim(); limit=60; confirmBulk=false; draw(); });
+  $('#rshow').addEventListener('change',e=>{ show=e.target.value; limit=60; confirmBulk=false; remember(); draw(); });
+  $('#rst').addEventListener('change',e=>{ st=e.target.value; limit=60; confirmBulk=false; remember(); draw(); });
+  $('#rmore').addEventListener('click',()=>{ limit+=100; draw(); });
+  $('#rt').addEventListener('input',e=>{ const tr=e.target.closest('tr[data-ed]'); if(!tr) return; DRAFT[tr.dataset.ed]={nama:tr.querySelector('.ed-nama').value,catatan:tr.querySelector('.ed-cat').value}; });
+  $('#rt').addEventListener('click',async e=>{
+    const tr=e.target.closest('tr[data-key],tr[data-ed]'); if(!tr) return; const key=tr.dataset.key||tr.dataset.ed; const p=REK.find(x=>x.key===key);
+    const b=e.target.closest('.rvb');
+    if(b){ const k=b.dataset.k; const cur=statusOf(p); await saveRev(key,{status:cur===k?'menunggu':k}); if(k==='revisi'&&cur!=='revisi'){ OPEN.add(key); draw(); } return; }
+    if(e.target.closest('.ed-open')){ OPEN.has(key)?OPEN.delete(key):OPEN.add(key); draw(); return; }
+    if(e.target.closest('.ed-close')){ OPEN.delete(key); delete DRAFT[key]; draw(); return; }
+    if(e.target.closest('.ed-save')){ const d=DRAFT[key]||{}; const nama=(d.nama??tr.querySelector('.ed-nama').value).trim(); const cat=(d.catatan??tr.querySelector('.ed-cat').value).trim();
+      const ok=await saveRev(key,{nama:nama===p.s4?'':nama,catatan:cat}); if(ok!==false){ OPEN.delete(key); delete DRAFT[key]; draw(); } }
+  });
+  $('#rbulk').addEventListener('click',async()=>{
+    if(!confirmBulk){ confirmBulk=true; draw(); return; }
+    confirmBulk=false; const L=list().filter(p=>needReview(p)&&statusOf(p)==='menunggu'&&p.s4); const bb=$('#rbulk'); bb.disabled=true;
+    for(let i=0;i<L.length;i++){ bb.textContent=`Menyimpan ${i+1}/${L.length}…`; const ok=await saveRev(L[i].key,{status:'setuju'}); if(ok===false) break; }
+    draw();
+  });
+  $('#rcopy').addEventListener('click',()=>{
+    const name=p=>REV[p.key]?.nama||p.s4;
+    const rows=REVIEWABLE.filter(p=>(!app||p.app===app)&&(statusOf(p)==='setuju'||(statusOf(p)==='revisi'&&REV[p.key]?.nama)));
+    if(!rows.length){ toast('Belum ada card yang ditandai Dipakai.'); return; }
+    const tsv=[['Aplikasi','Tab','ID','1 Awal','2 Perubahan pertama','3 Revisi (nama aplikasi)','Data SEO sekarang','4 Nama final','Slug final','Keyword','Catatan'].join('\t'),...rows.map(p=>[BY[p.app]?.name||p.app,p.tab,p.id,p.s1,p.s2,p.s3||p.base,p.seo,name(p),slug2(name(p)),p.nkw,REV[p.key]?.catatan||''].join('\t'))].join('\n');
+    try{ navigator.clipboard.writeText(tsv).then(()=>toast(`${rows.length} baris disalin (format tabel, bisa ditempel ke Sheets).`),()=>toast('Gagal menyalin.')); }catch(err){ toast('Gagal menyalin.'); }
+  });
+  draw();
+}
+function vRekap(){
+  const tot=REK.length, ch=REK.filter(isChange).length, um=REK.filter(p=>p.src==='umum').length, fl=REK.filter(p=>p.flags.length).length, tp=REK.filter(p=>p.src==='tetap').length;
+  view.innerHTML = `<div class="panel"><h2>Rekap perubahan nama untuk preview tim Academy</h2>
+    <p class="lead">Setiap card ditampilkan dalam empat tahap: nama awal, perubahan pertama (laporan 2–11 Nov), revisi (nama di aplikasi per 19 Nov), dan saran revisi terbaru 20/11/2026. Tahap 4 mengikuti rumus revisi 20/11/2026 per aplikasi; card yang tidak disebut langsung di revisi dibuat dengan rumus yang sama. Belum ada yang diubah di Markaz. Isi nama kamu, lalu beri status <b>Dipakai</b>, <b>Revisi</b> (boleh tulis nama lain), atau <b>Tidak dipakai</b>, dan tambahkan catatan bila perlu.</p>
+    <div class="stats"><div class="stat"><div class="k">Card aktif</div><div class="v">${tot.toLocaleString('id-ID')}</div></div><div class="stat"><div class="k">Berubah di tahap 4</div><div class="v" style="color:var(--accent)">${ch}</div></div><div class="stat"><div class="k">Sudah sesuai rumus</div><div class="v ok">${tp}</div></div><div class="stat"><div class="k">Perlu keputusan</div><div class="v warn">${um}</div></div><div class="stat"><div class="k">Menunggu tinjauan</div><div class="v" id="rpend">${pendingCount()}</div></div></div>
+    <p class="hint" style="margin-top:12px">${fl} card diberi catatan kecil (mis. nama sama dengan card lain, card mitra, atau contoh revisi yang memakai nama Data SEO). Pilih "Ada catatan untuk dicek" untuk melihatnya.</p></div>
+   <div class="panel" id="rlist"><h2>Rekap per card</h2><div id="rbox"></div></div>`;
+  rekapList($('#rbox'));
+  const inner=REDRAW; REDRAW=()=>{ const e=$('#rpend'); if(e) e.textContent=pendingCount(); inner(); };
+}
+function vRumus20(){
+  const apps=DATA.filter(a=>RUM[a.slug]);
+  view.innerHTML = `<div class="panel"><h2>Rumus revisi 20/11/2026</h2><p class="lead">Rumus penamaan per aplikasi, ditampilkan persis seperti yang ditulis di revisi. Klik nama aplikasi untuk melihat rekap card-nya.</p></div>
+    ${apps.map(a=>`<div class="panel"><div class="hero" style="margin-bottom:12px">${mono(a,true)}<div class="t"><h2>${esc(a.name)}</h2><div class="chips"><span class="chip">${propOf(a.slug).length} card berubah / perlu keputusan</span><a class="chip" href="#rekap" data-app="${a.slug}">Lihat rekap ${esc(a.name)} →</a></div></div></div>${rumusBox(a.slug)}</div>`).join('')}`;
+  view.querySelectorAll('a[data-app]').forEach(x=>x.addEventListener('click',()=>{ let o={}; try{ o=JSON.parse(store.get('rk','{}')); }catch(e){} o.app=x.dataset.app; store.set('rk',JSON.stringify(o)); }));
+}
+function vMeeting(){
+  const r1=REK.filter(p=>p.src==='meeting').length;
+  const O=MEET.ojk, E=MEET.ojkEx;
+  const ojrow=k=>`<tr><td class="after">${k==='app'?'Nama di aplikasi':'Data SEO'}</td>${['depan','tengah','belakang'].map(x=>`<td class="num">${O[k][x]||0}</td>`).join('')}<td class="count">${esc(E[k].belakang||'')} · ${esc(E[k].tengah||'')}</td></tr>`;
+  view.innerHTML = `<div class="panel"><div class="hero"><div class="t"><h2>Catatan meeting · 20 Nov 2026</h2><div class="chips"><span class="chip">Tindak lanjut cek ulang 19 Nov</span><span class="chip">Data SEO &amp; Data Kategori</span><span class="chip">Tim SEO + tim Academy</span></div></div></div>
+    <h3>Ringkasan</h3><ul class="prose-list"><li>Laporan 19 Nov dipakai sebagai dasar daftar perubahan per aplikasi.</li><li>Semua perubahan didaftar dulu dan ditinjau tim Academy sebelum dikerjakan di Markaz.</li><li>Setelah meeting, rumus penamaan per aplikasi dikirim sebagai revisi 20/11/2026 (lihat <a href="#rumus20">Rumus Revisi 20/11</a>). Rekap 4 tahap per card ada di <a href="#rekap">Rekap Nama</a>.</li></ul></div>
+   <div class="panel"><span class="st ok">Disepakati</span><h2 style="margin-top:8px">1. JadiSekdin — latsol berinstansi: nama sekolah di depan</h2>
+    <p>Jika latsol punya instansi sekolah, nama instansinya diletakkan di depan, tepat setelah kata "Soal".</p>
+    ${table([['Sebelum','Sesudah'],['Soal TPA Numerik Berhitung STAN','Soal STAN TPA Numerik Berhitung'],['Soal Verbal Silogisme IPDN','Soal IPDN Verbal Silogisme']])}
+    <p class="hint">Diterapkan ke ${r1} latsol STAN/IPDN di rekap (sumber: Catatan meeting 20/11).</p></div>
+   <div class="panel"><span class="st ok">Dijawab di revisi 20/11</span><h2 style="margin-top:8px">2. Fitur Tryout — kata di depan: Tryout, Tes, atau Simulasi</h2>
+    <p>Revisi 20/11/2026 menetapkan kata depan per aplikasi. "Tes": JadiBUMN (kecuali subtes disingkat), JadiPolisi, JadiPrajurit, JadiSekdin, TOEFL Academy, PsikotesKerja ("Tes Psikotes"). "Tryout": Cerebrum, JadiBeasiswa, JagoTPA, JadiOJK (TOEFL memakai "Tes TOEFL"), JadiPCPM, JadiPPG, JadiPPPK, JagoUKP. JadiASN memakai daftar nama di revisi. "Simulasi" tidak dipakai.</p></div>
+   <div class="panel"><span class="st ok">Dijawab di revisi 20/11</span><h2 style="margin-top:8px">3. Kata "OJK" di depan atau di belakang?</h2>
+    <p>Revisi 20/11/2026: Latsol dan Course JadiOJK memakai "Soal OJK …" dan "Materi OJK …" (OJK di depan). Tryout memakai kata "Tryout" di depan.</p>
+    <div class="tscroll"><table><thead><tr><th>Sebelum revisi</th><th class="num">Depan</th><th class="num">Tengah</th><th class="num">Belakang</th><th>Contoh</th></tr></thead><tbody>${ojrow('app')}${ojrow('seo')}</tbody></table></div></div>
+   <div class="panel"><span class="st ok">Disepakati</span><h2 style="margin-top:8px">4. Alur kerja: daftar dulu, tinjau, baru ubah</h2>
+    <ol class="steps"><li>Tarik ulang data Markaz dan bandingkan dengan laporan sebelumnya (<a href="#perubahan">Perubahan 19 Nov</a>).</li><li>Susun rekap nama 4 tahap per aplikasi sesuai rumus revisi (<a href="#rekap">Rekap Nama</a>).</li><li>Tim Academy memberi status Dipakai, Revisi, atau Tidak dipakai, plus catatan.</li><li>Hanya yang berstatus Dipakai (atau Revisi dengan nama baru) yang dikerjakan: Data SEO dulu, lalu mirror ke Data Kategori/Data Course, lalu redirect 301 untuk slug yang berubah.</li><li>Hasilnya masuk laporan before–after berikutnya.</li></ol></div>`;
+  REDRAW=null;
+}
+
+/* ---------- helpers ---------- */
+const stripCount = s=>String(s||'').replace(/\s*\(\d+\)\s*$/,'').trim();
+function lenTag(s,min,max){ const t=stripCount(s); if(!t) return ''; const n=[...t].length; const ok=n>=min&&n<=max; return `<span class="len ${ok?'ok':'warn'}" title="Batas ${min}–${max} karakter">${n} kar.</span>`; }
+function stClass(s){ if(/dilewati/i.test(s)) return 'skip'; if(/gagal/i.test(s)) return 'bad'; if(/sudah sesuai|manual|revisi|mirror|latsol/i.test(s)) return 'info'; return 'ok'; }
+function slug2(s){ return '/'+String(s).toLowerCase().replace(/sma\/k/g,'sma smk').replace(/\//g,' ').replace(/\([^)]*\)/g,' ').replace(/&/g,' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s-]/g,' ').split(/[\s-]+/).filter(Boolean).join('-'); }
+function slugify(s){
+  const rom={'i':'1','ii':'2','iii':'3','iv':'4','v':'5'};
+  return '/'+String(s).toLowerCase().replace(/\([^)]*\)/g,' ').replace(/&/g,' ').normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[^a-z0-9\s-]/g,' ').split(/[\s-]+/).filter(Boolean).filter(w=>w!=='dan'&&w!=='and').map(w=>rom[w]&&/^(i|ii|iii|iv|v)$/.test(w)?rom[w]:w).join('-');
+}
+function table(rows){
+  if(!rows||!rows.length) return '';
+  const [h,...b]=rows;
+  return `<div class="tscroll"><table><thead><tr>${h.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${b.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function blocks(bs){
+  let html='', list=[];
+  const flush=()=>{ if(list.length){ html+=`<ul class="prose-list">${list.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`; list=[]; } };
+  bs.forEach(b=>{
+    if(b.p){ list.push(b.p); return; }
+    flush();
+    if(b.h) html+=`<h3>${esc(b.h)}</h3>`;
+    else if(b.h3) html+=`<h4>${esc(b.h3)}</h4>`;
+    else if(b.table) html+=table(b.table);
+  });
+  flush(); return html;
+}
+function copyText(btn,text){
+  const done=()=>{const o=btn.textContent;btn.textContent='Tersalin';setTimeout(()=>btn.textContent=o,1200)};
+  try{ navigator.clipboard.writeText(text).then(done,()=>selectFallback(btn)); }catch(e){ selectFallback(btn); }
+}
+function selectFallback(btn){ const el=btn.previousElementSibling; if(!el) return; const r=document.createRange(); r.selectNodeContents(el); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+/* ---------- sidebar ---------- */
+function buildSide(){
+  const groups=[1,2,3].map(t=>({t,apps:DATA.filter(a=>a.tier===t)}));
+  $('#navApps').innerHTML = groups.map(g=>{
+    const open = store.get('grp'+g.t,'1')==='1';
+    return `<button class="grp" aria-expanded="${open}" data-g="${g.t}" data-label="tier ${g.t} ${g.apps.map(a=>a.name).join(' ').toLowerCase()}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7v10l9 5 9-5V7z"/></svg>Tier ${g.t}<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="sub" id="grp${g.t}" ${open?'':'hidden'}>${g.apps.map(a=>`<a href="#app-${a.slug}" data-v="app-${a.slug}" data-label="${esc(a.name.toLowerCase())}"><span class="dot" style="background:${a.color}"></span>${esc(a.name)}<span class="cnt">${a.done?a.stats.opt+'/'+a.stats.aktif:'belum'}</span></a>`).join('')}</div>`;
+  }).join('');
+  $('#navApps').querySelectorAll('button.grp').forEach(b=>b.addEventListener('click',()=>{
+    const open=b.getAttribute('aria-expanded')!=='true'; b.setAttribute('aria-expanded',open); $('#grp'+b.dataset.g).hidden=!open; store.set('grp'+b.dataset.g,open?'1':'0');
+  }));
+  $('#platMenu').innerHTML = DATA.map(a=>`<button data-slug="${a.slug}"><span class="dot" style="background:${a.color}"></span>${esc(a.name)}</button>`).join('');
+  $('#platMenu').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; location.hash='app-'+b.dataset.slug; togglePlat(false);});
+  $('#platBtn').addEventListener('click',()=>togglePlat($('#platMenu').hidden));
+  $('#menuSearch').addEventListener('input',e=>{
+    const q=e.target.value.trim().toLowerCase();
+    document.querySelectorAll('.side [data-label]').forEach(el=>{ if(el.matches('button.grp')) return; el.hidden = q && !el.dataset.label.includes(q); });
+    if(q) document.querySelectorAll('.sub').forEach(s=>s.hidden=false);
+  });
+}
+function togglePlat(open){ $('#platMenu').hidden=!open; $('#platBtn').setAttribute('aria-expanded',open); }
+function setActive(v){
+  document.querySelectorAll('.side a[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===v || (v.startsWith('app-')&&a.dataset.v===v)));
+  const app = v.startsWith('app-') ? BY[v.slice(4)] : null;
+  $('#platLabel').textContent = app ? app.name : 'Platform';
+}
+
+/* ---------- views ---------- */
+function vPlatform(){
+  const f = store.get('pf','semua');
+  view.innerHTML = `<a class="banner" href="#perubahan"><div><b>Cek ulang 19 Nov: ${NEED_TOT} card perlu ditindaklanjuti</b><div class="count">${CHG_TOT.beda+CHG_TOT.baru_beda} nama di aplikasi berbeda dari Data SEO (${YEAR_TOT} hanya beda tahun) · ${CHG_TOT.kosong_baru+CHG_TOT.kosong_lama} card aktif tanpa Data SEO · ${CHG_TOT.nonaktif} dinonaktifkan</div></div><span class="go">Lihat perubahan →</span></a>
+    <a class="banner info" href="#rekap"><div><b>Revisi 20/11/2026: ${REVIEWABLE.length} card dengan saran nama baru menunggu tinjauan tim Academy</b><div class="count">Rekap 4 tahap per card: awal → perubahan pertama → revisi → saran revisi terbaru</div></div><span class="go">Buka rekap →</span></a>
+    <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="pq" type="search" placeholder="Search platform..." aria-label="Cari platform"></div>
+    <div class="seg" role="group" aria-label="Saring platform">${[['semua','Semua'],['done','Sudah dilaporkan'],['none','Belum ada laporan']].map(([k,l])=>`<button data-f="${k}" aria-pressed="${k===f}">${l}</button>`).join('')}</div>
+    <span class="count" id="pc"></span></div><div class="grid" id="pgrid"></div>`;
+  const draw=()=>{
+    const q=$('#pq').value.trim().toLowerCase(), cur=store.get('pf','semua');
+    const list=DATA.filter(a=>(!q||a.name.toLowerCase().includes(q)||a.fokus.toLowerCase().includes(q)) && (cur==='semua'||(cur==='done'?a.done:!a.done)));
+    $('#pc').textContent=`${list.length} dari ${DATA.length} platform`;
+    $('#pgrid').innerHTML = list.map(a=>{
+      const s=a.stats;
+      const meta = a.done ? `<div class="pmeta"><div class="row"><span>${s.opt} dioptimasi</span><span>${s.skip} dilewati</span></div><div class="pbar"><i class="a" style="width:${s.opt/s.aktif*100}%"></i><i class="b" style="width:${s.skip/s.aktif*100}%"></i></div><div class="row"><span>${s.aktif} card aktif</span><span>${esc(s.tanggal)}</span></div></div>`
+        : `<div class="pmeta"><div class="ptag">Belum ada laporan</div><div class="row"><span>${esc(a.fokus)}</span></div></div>`;
+      const nd=needOf(a.slug); const chip=CHG[a.slug]?`<div class="pchg${nd?'':' zero'}">${nd?nd+' perlu tindakan (19 Nov)':'Tidak ada perubahan (19 Nov)'}</div>`:'';
+      return `<a class="pcard${a.done?'':' none'}" href="#app-${a.slug}">${tier(a)}${mono(a)}<div class="pname">${esc(a.name)}</div>${chip}${meta}</a>`;
+    }).join('') || `<div class="empty">Tidak ada platform yang cocok.</div>`;
+  };
+  $('#pq').addEventListener('input',draw);
+  view.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{ store.set('pf',b.dataset.f); view.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); draw(); }));
+  draw();
+}
+
+function vRingkasan(){
+  const max=Math.max(...DONE.map(a=>a.stats.aktif));
+  view.innerHTML = `<div class="panel"><h2>Hasil optimasi ${DONE.length} aplikasi</h2><p class="lead">${TOT.opt} dari ${TOT.aktif} card aktif terisi dan terverifikasi setelah reload; ${TOT.skip} card dilewati karena keyword tidak ada di Ahrefs atau perlu keputusan. Untuk JadiBUMN, Cerebrum, dan JadiOJK, angka dioptimasi mencakup card yang sudah sesuai standar sebelum sesi.</p>
+    <div class="stats"><div class="stat"><div class="k">Aplikasi selesai</div><div class="v">${DONE.length} / ${DATA.length}</div></div><div class="stat"><div class="k">Card aktif</div><div class="v">${TOT.aktif}</div></div><div class="stat"><div class="k">Dioptimasi</div><div class="v ok">${TOT.opt}</div></div><div class="stat"><div class="k">Dilewati</div><div class="v warn">${TOT.skip}</div></div><div class="stat"><div class="k">Cakupan</div><div class="v">${Math.round(TOT.opt/TOT.aktif*100)}%</div></div></div></div>
+    <div class="panel"><h2>Card per aplikasi</h2><p class="lead">Panjang batang = jumlah card aktif. Klik nama aplikasi untuk membuka laporannya.</p>
+      <div class="chart">${[...DONE].sort((a,b)=>b.stats.aktif-a.stats.aktif).map(a=>{const s=a.stats;return `<div class="crow"><a href="#app-${a.slug}">${esc(a.name)}</a><div class="ctrack" title="${s.opt} dioptimasi, ${s.skip} dilewati"><i class="a" style="left:0;width:${s.opt/max*100}%"></i><i class="b" style="left:${s.opt/max*100}%;width:${s.skip/max*100}%"></i></div><div class="cval">${s.opt} / ${s.aktif}</div></div>`}).join('')}</div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>Dioptimasi</span><span><i style="background:var(--warn)"></i>Dilewati</span></div></div>
+    <div class="panel"><h2>Rekap verifikasi</h2><p class="lead">Verifikasi dilakukan setelah halaman dimuat ulang, kolom per kolom.</p>
+      <div class="tscroll"><table><thead><tr><th>Aplikasi</th><th>Tanggal</th><th class="num">Aktif</th><th class="num">Dioptimasi</th><th class="num">Dilewati</th><th>Data SEO</th><th>Mirror</th><th>Catatan utama</th></tr></thead><tbody>
+      ${DONE.map(a=>{const s=a.stats;return `<tr><td><a href="#app-${a.slug}" class="after" style="text-decoration:none">${esc(a.name)}</a></td><td>${esc(s.tanggal)}</td><td class="num">${s.aktif}</td><td class="num">${s.opt}</td><td class="num">${s.skip}</td><td>${esc(s.verSeo)}</td><td>${esc(s.verMirror)}</td><td>${esc(s.note)}</td></tr>`}).join('')}
+      <tr><td class="after">Total</td><td></td><td class="num after">${TOT.aktif}</td><td class="num after">${TOT.opt}</td><td class="num after">${TOT.skip}</td><td></td><td></td><td></td></tr></tbody></table></div></div>`;
+}
+
+function vRumus(){
+  view.innerHTML = `<div class="panel"><h2>Rumus umum</h2><p class="lead">Semua aplikasi memakai satu rumus dasar; yang berbeda hanya konteks ujian dan pembeda seri.</p>${table([['Unsur','Rumus','Contoh'],...RUMUS_UMUM])}
+    <h3>Urutan menentukan keyword</h3><ol class="steps">${LANGKAH.map(l=>`<li>${esc(l)}</li>`).join('')}</ol>
+    <h3>Batas panjang</h3>${table([['Kolom','Tryout & Latsol','Course'],['Meta Title','60–70 karakter','45–60 karakter'],['Meta Description','130–150 karakter','130–150 karakter (JadiASN: 120–160)'],['Deskripsi','1–2 kalimat manfaat, tanpa jumlah soal dan janji lulus','sama'],['Keywords','1 keyword utama','1 keyword utama']])}</div>
+    <div class="panel"><h2>Skill per aplikasi</h2><p class="lead">Pilih aplikasi untuk melihat rumusnya.</p>
+      <div class="bar" style="margin-bottom:12px"><select class="sel" id="rsel" aria-label="Pilih aplikasi">${DONE.map(a=>`<option value="${a.slug}">${esc(a.name)}</option>`).join('')}</select><a class="chip" id="rlink" href="#">Buka laporan</a></div>
+      <div id="rbody"></div></div>`;
+  const sel=$('#rsel'); sel.value=store.get('rumusApp',DONE[0].slug); if(!BY[sel.value]) sel.value=DONE[0].slug;
+  const draw=()=>{ const a=BY[sel.value]; store.set('rumusApp',a.slug); $('#rlink').href='#app-'+a.slug; $('#rbody').innerHTML=table([['Unsur','Rumus','Contoh'],...a.rumus]); };
+  sel.addEventListener('change',draw); draw();
+}
+
+function vCek(){
+  view.innerHTML = `<div class="panel"><h2>Cek isian sebelum disimpan</h2><p class="lead">Ketik Nama SEO untuk mendapat slug sesuai rumus, lalu cek panjang Meta Title dan Meta Description. Keyword tetap harus dicek di Ahrefs.</p>
+   <div class="tool">
+    <div class="field"><label for="cTab">Tab</label><select id="cTab"><option>Tryout</option><option>Latsol</option><option>Course</option></select></div>
+    <div class="field"><label for="cName">Nama (SEO)</label><input id="cName" value="Soal TIU Numerik Deret Angka 2026"></div>
+    <div class="field" style="grid-column:1/-1"><label>URL Slug</label><div class="out"><span id="cSlug"></span><button class="copy" id="cCopy">Salin</button></div><div class="hint">Huruf kecil, kata dipisah "-", tanda baca dan isi kurung dibuang, angka Romawi jadi angka.</div></div>
+    <div class="field"><label for="cTitle">Meta Title</label><textarea id="cTitle">Kumpulan Latihan Soal TIU Numerik Deret Angka 2026 CPNS dan Pembahasan</textarea><div class="meter" id="mT"></div><div class="hint" id="hT"></div></div>
+    <div class="field"><label for="cDesc">Meta Description</label><textarea id="cDesc">Latih pemahaman deret angka lewat soal TIU Numerik Deret Angka 2026. Pelajari pembahasannya dan evaluasi jawabanmu untuk persiapan CPNS.</textarea><div class="meter" id="mD"></div><div class="hint" id="hD"></div></div>
+   </div></div>`;
+  const meter=(el,hint,n,min,max)=>{ const cap=max*1.25; el.innerHTML=`<div class="zone" style="left:${min/cap*100}%;width:${(max-min)/cap*100}%"></div><div class="fill" style="width:${Math.min(n,cap)/cap*100}%"></div>`;
+    hint.innerHTML = `${n} karakter · batas ${min}–${max} · ` + (n<min?`<b style="color:var(--warn)">kurang ${min-n}</b>`:n>max?`<b style="color:var(--warn)">lebih ${n-max}</b>`:`<b style="color:var(--ok)">sesuai</b>`); };
+  const draw=()=>{ const course=$('#cTab').value==='Course'; $('#cSlug').textContent=slugify($('#cName').value);
+    meter($('#mT'),$('#hT'),[...$('#cTitle').value.trim()].length,course?45:60,course?60:70);
+    meter($('#mD'),$('#hD'),[...$('#cDesc').value.trim()].length,130,150); };
+  ['cTab','cName','cTitle','cDesc'].forEach(id=>$('#'+id).addEventListener('input',draw));
+  $('#cCopy').addEventListener('click',e=>copyText(e.currentTarget,$('#cSlug').textContent));
+  draw();
+}
+
+function vKendala(){
+  const lv={tinggi:'bad',sedang:'skip',rendah:'info'};
+  view.innerHTML = `<div class="panel"><h2>Kendala dan tindak lanjut</h2><p class="lead">Delapan hal masih terbuka; yang paling mendesak adalah keputusan format slug, redirect 301 slug PCS di JadiOJK, dan ${TOT.skip} card yang dilewati.</p>
+   <div class="tscroll"><table><thead><tr><th>Prioritas</th><th>Aplikasi</th><th>Kendala atau temuan</th><th>Tindak lanjut</th></tr></thead><tbody>
+   ${KENDALA.map(k=>`<tr><td><span class="st ${lv[k[3]]}">${k[3]}</span></td><td class="after">${esc(k[0])}</td><td>${esc(k[1])}</td><td>${esc(k[2])}</td></tr>`).join('')}</tbody></table></div>
+   <p class="hint" style="margin-top:12px">Untuk semua aplikasi: jika URL yang sudah terindeks berubah, pasang redirect 301, lalu perbarui sitemap dan internal link.</p></div>`;
+}
+
+function vApp(a){
+  if(!a){ location.hash='platform'; return; }
+  if(!a.done){
+    view.innerHTML = `<div class="panel"><div class="hero">${mono(a,true)}<div class="t"><h2>${esc(a.name)}</h2><div class="chips"><span class="chip">Tier ${a.tier}</span><span class="chip mono-t">?p=${esc(a.kode)}</span><span class="chip">${esc(a.fokus)}</span></div></div></div>
+      <p style="margin-top:18px">Belum ada laporan before–after untuk ${esc(a.name)}. Gunakan rumus umum dan cek isian sebelum mulai mengisi Data SEO.</p>
+      <div class="chips" style="margin-top:12px"><a class="chip" href="#rumus">Lihat rumus SEO</a><a class="chip" href="#cek">Cek isian</a></div></div>`;
+    return;
+  }
+  const s=a.stats, tabs=[...new Set(a.rows.map(r=>r.tab))];
+  const stK='tab:'+a.slug, sub=store.get(stK,'card');
+  view.innerHTML = `<div class="panel"><div class="hero">${mono(a,true)}<div class="t"><h2>${esc(a.name)}</h2><div class="chips"><span class="chip">Tier ${a.tier}</span><span class="chip mono-t">?p=${esc(a.kode)}</span><span class="chip">${esc(s.tanggal)}</span><span class="chip">${esc(a.fokus)}</span><span class="chip mono-t">${esc(a.domain)}</span></div></div></div>
+    <div class="stats"><div class="stat"><div class="k">Card aktif</div><div class="v">${s.aktif}</div></div><div class="stat"><div class="k">Dioptimasi</div><div class="v ok">${s.opt}</div></div><div class="stat"><div class="k">Dilewati</div><div class="v ${s.skip?'warn':''}">${s.skip}</div></div><div class="stat"><div class="k">Data SEO</div><div class="v" style="font-size:20px">${esc(s.verSeo)}</div></div><div class="stat"><div class="k">Mirror</div><div class="v" style="font-size:20px">${esc(s.verMirror)}</div></div></div>
+    <div class="tabs" role="tablist">${[['card','Card SEO'],['chg','Perubahan 19 Nov ('+needOf(a.slug)+')'],['usulan','Rekap Nama 20/11 ('+propOf(a.slug).length+')'],['skill','Skill & Rumus'],['catatan','Ringkasan & Catatan']].map(([k,l])=>`<button role="tab" data-t="${k}" aria-selected="${k===sub}">${l}</button>`).join('')}</div>
+    <div id="sub"></div></div>`;
+  const drawSub=k=>{
+    REDRAW=null; store.set(stK,k); view.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===k));
+    const box=$('#sub');
+    if(k==='skill'){ box.innerHTML=`<p class="lead">Rumus yang dipakai saat mengoptimasi ${esc(a.name)}.</p>${table([['Unsur','Rumus','Contoh'],...a.rumus])}`; return; }
+    if(k==='catatan'){ box.innerHTML=blocks(a.blocks); return; }
+    if(k==='usulan'){ box.innerHTML=rumusBox(a.slug)+'<div id="rkb"></div>'; rekapList($('#rkb'),a.slug); return; }
+    REDRAW=null;
+    if(k==='chg'){
+      const items=(CHG[a.slug]?.items||[]).slice().sort((x,y)=>CAT_ORDER.indexOf(x.cat)-CAT_ORDER.indexOf(y.cat)); const o=chgOf(a.slug);
+      box.innerHTML = items.length ? `<p class="lead">Data dibaca ulang dari Markaz pada 19 Nov 2026: ${CHG[a.slug].aktif} card aktif. ${needOf(a.slug)} card perlu tindakan.</p>
+        <div class="chips" style="margin-bottom:14px">${CAT_ORDER.filter(k=>o[k]).map(k=>`<span class="st ${CAT[k].c}">${esc(CAT[k].t)}: ${o[k]}</span>`).join('')}</div>${chgTable('at')}`
+        : `<div class="empty">Tidak ada perubahan dibanding laporan 11 Nov.</div>`;
+      if(items.length) $('#at').innerHTML=chgRows(items.map(i=>({...i,app:a.slug})));
+      return;
+    }
+    const statuses=[...new Set(a.rows.map(r=>r.status))];
+    box.innerHTML=`<div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="cq" type="search" placeholder="Cari nama, slug, atau keyword..." aria-label="Cari card"></div>
+      <div class="seg" role="group" aria-label="Saring tab">${['Semua',...tabs].map((t,i)=>`<button data-tab="${t}" aria-pressed="${i===0}">${t}</button>`).join('')}</div>
+      ${statuses.length>1?`<select class="sel" id="cs" aria-label="Saring status"><option value="">Semua status</option>${statuses.map(x=>`<option>${esc(x)}</option>`).join('')}</select>`:''}
+      <span class="count" id="cc"></span></div>
+      <div class="tscroll"><table><thead><tr><th>Tab</th><th>Nama before → after</th><th>URL Slug</th><th>Keyword</th><th>Status</th></tr></thead><tbody id="ct"></tbody></table></div>
+      <p class="hint" style="margin-top:10px">Klik baris untuk melihat Meta Title, Meta Description, dan Deskripsi beserta jumlah karakternya.</p>`;
+    let curTab='Semua';
+    const draw=()=>{
+      const q=$('#cq').value.trim().toLowerCase(), st=$('#cs')?$('#cs').value:'';
+      const list=a.rows.filter(r=>(curTab==='Semua'||r.tab===curTab)&&(!st||r.status===st)&&(!q||[r.before,r.after,r.slug,r.kw,r.id,r.item].join(' ').toLowerCase().includes(q)));
+      $('#cc').textContent=`${list.length} dari ${a.rows.length} card`;
+      $('#ct').innerHTML = list.map((r,i)=>{
+        const same = r.before===r.after;
+        return `<tr class="rowx" tabindex="0" aria-expanded="false" data-i="${a.rows.indexOf(r)}"><td><span class="tab-pill">${esc(r.tab)}</span>${r.id?`<div class="count">#${esc(r.id)}</div>`:''}</td>
+          <td>${same?'':`<div class="before">${esc(r.before)}</div>`}<div class="after">${esc(r.after)}</div></td>
+          <td>${r.slug?`<span class="slug">${esc(r.slug)}</span>`:'<span class="count">–</span>'}</td>
+          <td>${r.kw?`<span class="kw">${esc(r.kw)}</span>`:'<span class="count">–</span>'}</td>
+          <td><span class="st ${stClass(r.status)}">${esc(r.status)}</span></td></tr>`;
+      }).join('') || `<tr><td colspan="5"><div class="empty">Tidak ada card yang cocok dengan filter.</div></td></tr>`;
+    };
+    $('#cq').addEventListener('input',draw); if($('#cs')) $('#cs').addEventListener('change',draw);
+    box.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{curTab=b.dataset.tab; box.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); draw();}));
+    const toggle=tr=>{
+      const open=tr.getAttribute('aria-expanded')==='true';
+      if(open){ tr.setAttribute('aria-expanded','false'); tr.nextElementSibling?.classList.contains('detail')&&tr.nextElementSibling.remove(); return; }
+      const r=a.rows[+tr.dataset.i]; const course=r.tab==='Course';
+      const tMin=course?45:60, tMax=course?60:70;
+      const d=document.createElement('tr'); d.className='detail';
+      d.innerHTML=`<td colspan="5"><div class="dgrid">
+        ${r.item?`<div class="l">Item</div><div>${esc(r.item)}</div>`:''}
+        <div class="l">Meta Title</div><div>${r.mt?esc(stripCount(r.mt))+lenTag(r.mt,tMin,tMax):'<span class="count">–</span>'}</div>
+        <div class="l">Meta Description</div><div>${r.md?esc(stripCount(r.md))+lenTag(r.md,130,150):'<span class="count">–</span>'}</div>
+        <div class="l">Deskripsi</div><div>${r.desc?esc(r.desc):'<span class="count">–</span>'}</div>
+        ${r.slug?`<div class="l">URL Slug</div><div><span class="slug">${esc(r.slug)}</span><button class="copy">Salin</button></div>`:''}
+        ${r.reason?`<div class="l">Alasan dilewati</div><div>${esc(r.reason)}</div>`:''}
+      </div></td>`;
+      tr.after(d); tr.setAttribute('aria-expanded','true');
+      d.querySelector('.copy')?.addEventListener('click',e=>{e.stopPropagation(); copyText(e.currentTarget,r.slug);});
+    };
+    $('#ct').addEventListener('click',e=>{const tr=e.target.closest('tr.rowx'); if(tr) toggle(tr);});
+    $('#ct').addEventListener('keydown',e=>{const tr=e.target.closest('tr.rowx'); if(tr&&(e.key==='Enter'||e.key===' ')){e.preventDefault(); toggle(tr);}});
+    draw();
+  };
+  view.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>drawSub(b.dataset.t)));
+  drawSub(sub);
+}
+
+/* ---------- router ---------- */
+const TITLES={platform:'Pilih Platform',perubahan:'Perubahan 19 Nov',meeting:'Catatan Meeting 20 Nov',rekap:'Rekap Nama 20/11/2026',rumus20:'Rumus Revisi 20/11/2026',usulan:'Rekap Nama 20/11/2026',ringkasan:'Ringkasan',rumus:'Rumus SEO',cek:'Cek Isian',kendala:'Kendala & Tindak Lanjut'};
+function route(){
+  let v=(location.hash||'#platform').slice(1); if(!TITLES[v]&&!v.startsWith('app-')) v='platform';
+  setActive(v); REDRAW=null;
+  if(v.startsWith('app-')){ const a=BY[v.slice(4)]; $('#title').textContent=a?a.name:'Pilih Platform'; $('#crumb').innerHTML=`<a href="#platform">Pilih Platform</a><span>/</span><span>Tier ${a?a.tier:''}</span>`; vApp(a); }
+  else { $('#title').textContent=TITLES[v]; $('#crumb').innerHTML=v==='platform'?'<span>Markaz SEO</span>':'<a href="#platform">Pilih Platform</a>'; ({platform:vPlatform,perubahan:vPerubahan,meeting:vMeeting,rekap:vRekap,rumus20:vRumus20,usulan:vRekap,ringkasan:vRingkasan,rumus:vRumus,cek:vCek,kendala:vKendala})[v](); }
+  document.body.classList.remove('nav-open');
+  window.scrollTo(0,0);
+}
+buildSide();
+$('#chgBadge').textContent=NEED_TOT; $('#propBadge').textContent=REVIEWABLE.length; initStore();
+window.addEventListener('hashchange',route);
+$('#openNav').addEventListener('click',()=>document.body.classList.add('nav-open'));
+$('#hamb').addEventListener('click',()=>document.body.classList.remove('nav-open'));
+$('#scrim').addEventListener('click',()=>document.body.classList.remove('nav-open'));
+$('#themeBtn').addEventListener('click',()=>{
+  const r=document.documentElement; const cur=r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  const next=cur==='dark'?'light':'dark'; r.setAttribute('data-theme',next); store.set('theme',next);
+});
+const saved=store.get('theme',''); if(saved) document.documentElement.setAttribute('data-theme',saved);
+route();
+})();
+</script>
