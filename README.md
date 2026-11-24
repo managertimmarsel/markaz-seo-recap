@@ -6,7 +6,7 @@ Dashboard laporan SEO 15 aplikasi Markaz, ditambah **rekap nama 4 tahap per card
 - `template.html` — halaman dashboard (HTML, CSS, JS) dengan placeholder data.
 - `data/` — data laporan, perubahan 19 Nov, rekap 4 tahap, rumus revisi 20/11, statistik meeting.
 - `scripts/build.mjs` — build tanpa dependency: menghasilkan `public/index.html` dan `public/config.js`.
-- `supabase/schema.sql` — tabel `review` (status terakhir per card) dan `review_log` (riwayat setiap perubahan).
+- `supabase/schema.sql` — tabel `review` (status & catatan Academy per card), `review_log` (riwayatnya), `seo_feedback` (feedback tim SEO per card) dan `seo_feedback_log`.
 
 ## Setup
 - Supabase: project `markaz-seo-recap` (Singapore) sudah dibuat dan tabelnya sudah ada (`supabase/schema.sql`).

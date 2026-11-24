@@ -47,3 +47,29 @@ create policy "log insert" on public.review_log for insert to anon, authenticate
 do $$ begin
   alter publication supabase_realtime add table public.review;
 exception when duplicate_object then null; end $$;
+
+-- Feedback tim SEO per card (kolom "Feedback tim SEO" di halaman rekap), ditambahkan 24/11/2026.
+create table if not exists public.seo_feedback (
+  key         text primary key,
+  feedback    text not null default '' check (char_length(feedback) <= 4000),
+  author      text not null check (char_length(author) between 1 and 120),
+  updated_at  timestamptz not null default now()
+);
+create table if not exists public.seo_feedback_log (
+  id          bigint generated always as identity primary key,
+  key         text not null,
+  feedback    text check (char_length(feedback) <= 4000),
+  author      text check (char_length(author) <= 120),
+  created_at  timestamptz not null default now()
+);
+create index if not exists seo_feedback_log_key_idx on public.seo_feedback_log (key);
+alter table public.seo_feedback     enable row level security;
+alter table public.seo_feedback_log enable row level security;
+create policy "seo fb read"    on public.seo_feedback     for select to anon, authenticated using (true);
+create policy "seo fb insert"  on public.seo_feedback     for insert to anon, authenticated with check (true);
+create policy "seo fb update"  on public.seo_feedback     for update to anon, authenticated using (true) with check (true);
+create policy "seo log read"   on public.seo_feedback_log for select to anon, authenticated using (true);
+create policy "seo log insert" on public.seo_feedback_log for insert to anon, authenticated with check (true);
+do $$ begin
+  alter publication supabase_realtime add table public.seo_feedback;
+exception when duplicate_object then null; end $$;

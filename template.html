@@ -263,6 +263,11 @@ mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;bor
 .rtab .sn{display:none}
 .rtab td.s4{background:color-mix(in srgb,var(--accent) 6%,transparent);min-width:240px}
 .rtab th.h4{color:var(--accent)}
+.rtab th.hseo{color:var(--ok)}
+.rtab td.seoc{min-width:200px;background:color-mix(in srgb,var(--ok) 5%,transparent)}
+.fbnote{font-size:12.5px;background:var(--ok-soft);border-radius:6px;padding:6px 8px;white-space:pre-wrap}
+.fbed textarea{width:100%;min-height:96px;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;font-size:13px;background:var(--surface);color:var(--fg);resize:vertical}
+.fbed .btn{padding:6px 12px;font-size:12.5px}
 .rtab .s4v{font-weight:800;font-size:14.5px}
 .rtab .same{color:var(--muted);font-style:italic;font-size:12.5px}
 .meta4{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -319,7 +324,7 @@ mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;bor
       <div class="side-label">Laporan SEO</div>
       <nav class="nav" id="navMain">
         <a href="#platform" data-v="platform" data-label="pilih platform"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Pilih Platform</a>
-        <a href="#perubahan" data-v="perubahan" data-label="perubahan 19 nov cek ulang sinkron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M12 8v4l3 2"/></svg>Perubahan 19 Nov<span class="nbadge" id="chgBadge"></span></a>
+        <a href="#perubahan" data-v="perubahan" data-label="perubahan 19 nov cek ulang sinkron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M12 8v4l3 2"/></svg>Perubahan 19/11<span class="nbadge" id="chgBadge"></span></a>
         <a href="#meeting" data-v="meeting" data-label="catatan meeting 20 nov keputusan ojk tryout sekdin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3h8l4 4v14H4V3h4z"/><path d="M8 11h8M8 15h8M8 7h4"/></svg>Catatan Meeting</a>
         <a href="#rekap" data-v="rekap" data-label="rekap nama 4 tahap revisi 20/11 usulan tinjau academy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Rekap Nama 20/11<span class="nbadge" id="propBadge"></span></a>
         <a href="#rumus20" data-v="rumus20" data-label="rumus revisi 20/11 penamaan"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Rumus Revisi 20/11</a>
@@ -332,7 +337,7 @@ mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;bor
       <div class="side-label">Aplikasi</div>
       <nav class="nav" id="navApps"></nav>
     </div>
-    <div class="side-foot">Data Markaz Cerehub · Ahrefs ID · laporan 2–11 Nov, cek ulang 19 Nov 2026</div>
+    <div class="side-foot">Data Markaz Cerehub · Ahrefs ID · laporan 2–11 Nov, cek ulang 19/11/2026</div>
   </aside>
   <div class="scrim" id="scrim"></div>
 
@@ -345,7 +350,7 @@ mark{background:color-mix(in srgb,var(--warn) 22%,transparent);color:inherit;bor
           <h1 id="title">Pilih Platform</h1>
         </div>
         <div class="top-actions">
-          <span class="datechip">Laporan 2–11 Nov · Cek ulang 19 Nov 2026</span>
+          <span class="datechip">Laporan 2–11 Nov · Cek ulang 19/11/2026</span>
           <button class="icon-btn" id="themeBtn" aria-label="Ganti tema"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
           <div class="avatar" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.5"/><path d="M3 21c1-4.5 4.6-7 9-7s8 2.5 9 7z"/></svg></div>
         </div>
@@ -401,7 +406,7 @@ const KENDALA = [
  ['JadiPPPK, JagoTPA','Konten lintas ujian (CPNS, BUMN, PCPM, BI/OJK) aktif di aplikasi lain.','Cek apakah memang ditampilkan di aplikasi itu.','rendah'],
  ['JadiASN, JagoUKP','Copy Tryout JadiASN di luar dokumen tim belum direview. Meta Title JagoUKP Purchase dan Liveclass 59 karakter; tab Tryout, Latsol, Course JagoUKP masih kosong.','Review copy; tambah 1 karakter; isi tab JagoUKP.','rendah']];
 
-/* ---------- perubahan 19 Nov (tarik ulang data Markaz) ---------- */
+/* ---------- perubahan 19/11 (tarik ulang data Markaz) ---------- */
 const CHG = JSON.parse(document.getElementById('chg').textContent);
 const CAT = {
   beda:       {t:'Nama aplikasi ≠ Data SEO', c:'bad',  d:'Card lama. Data SEO masih hasil optimasi 11 Nov, tetapi nama di Data Kategori/Data Course sekarang berbeda.', a:'Sesuaikan Data SEO dengan nama aplikasi (terutama tahun), lalu cek ulang slug, Meta Title, dan Meta Description.'},
@@ -449,18 +454,18 @@ function chgRows(list){
       <td><span class="st ${C.c}">${esc(C.t)}</span></td><td class="count">${note}</td></tr>`;
   }).join('');
 }
-function chgTable(id){ return `<div class="tscroll"><table><thead><tr><th>Aplikasi</th><th>Tab</th><th>Nama di aplikasi (19 Nov)</th><th>Data SEO sekarang</th><th>Kategori</th><th>Catatan</th></tr></thead><tbody id="${id}"></tbody></table></div>`; }
+function chgTable(id){ return `<div class="tscroll"><table><thead><tr><th>Aplikasi</th><th>Tab</th><th>Nama di aplikasi (19/11)</th><th>Data SEO sekarang</th><th>Kategori</th><th>Catatan</th></tr></thead><tbody id="${id}"></tbody></table></div>`; }
 function vPerubahan(){
   const apps=DATA.filter(a=>CHG[a.slug]);
   const maxN=Math.max(...apps.map(a=>needOf(a.slug)),1);
-  view.innerHTML = `<div class="panel"><h2>Hasil tarik ulang data Markaz, 19 Nov 2026</h2>
+  view.innerHTML = `<div class="panel"><h2>Hasil tarik ulang data Markaz, 19/11/2026</h2>
     <p class="lead">Seluruh 15 aplikasi dibaca ulang lewat browser (tab Tryout, Latsol, Course, dan Umum untuk JagoUKP), lalu dibandingkan dengan laporan 2–11 Nov. Hanya dibaca; tidak ada data yang diubah di Markaz. ${NEED_TOT} card perlu ditindaklanjuti.</p>
     <div class="stats"><div class="stat"><div class="k">Aplikasi dicek</div><div class="v">${apps.length} / ${DATA.length}</div></div><div class="stat"><div class="k">Card aktif terbaca</div><div class="v">${AKTIF_NOW.toLocaleString('id-ID')}</div></div><div class="stat"><div class="k">Perlu tindakan</div><div class="v" style="color:var(--bad)">${NEED_TOT}</div></div><div class="stat"><div class="k">Beda tahun saja</div><div class="v warn">${YEAR_TOT}</div></div><div class="stat"><div class="k">Sinkron / nonaktif</div><div class="v ok">${CHG_TOT.baru_ok+CHG_TOT.seo_update} / ${CHG_TOT.nonaktif}</div></div></div>
     <div class="cats" id="cats">${CAT_ORDER.map(k=>`<button class="cat ${CAT[k].c}" data-k="${k}" aria-pressed="false"><span class="n">${CHG_TOT[k]}</span><span class="t">${esc(CAT[k].t)}</span><span class="d">${esc(CAT[k].d)}</span><span class="d"><b>Tindakan:</b> ${esc(CAT[k].a)}</span></button>`).join('')}</div>
     <p class="hint" style="margin-top:10px">Klik kategori untuk menyaring daftar di bawah. Angka card aktif hari ini menghitung semua card berstatus Aktif, termasuk course lintas aplikasi, sehingga tidak sama dengan cakupan laporan 11 Nov (1.150).</p></div>
    <div class="panel"><h2>Temuan utama</h2><ul class="find">${FINDINGS.map(f=>`<li><b>${esc(f[0])}</b>${esc(f[1])}</li>`).join('')}</ul></div>
    <div class="panel"><h2>Per aplikasi</h2><p class="lead">Klik angka untuk melihat daftarnya. Batang = card yang perlu tindakan.</p>
-    <div class="tscroll"><table class="mx"><thead><tr><th>Aplikasi</th><th class="num">Aktif 19 Nov</th>${CAT_ORDER.map(k=>`<th class="num" title="${esc(CAT[k].d)}">${esc(CAT[k].t)}</th>`).join('')}<th style="min-width:140px">Perlu tindakan</th></tr></thead><tbody>
+    <div class="tscroll"><table class="mx"><thead><tr><th>Aplikasi</th><th class="num">Aktif 19/11</th>${CAT_ORDER.map(k=>`<th class="num" title="${esc(CAT[k].d)}">${esc(CAT[k].t)}</th>`).join('')}<th style="min-width:140px">Perlu tindakan</th></tr></thead><tbody>
     ${[...apps].sort((x,y)=>needOf(y.slug)-needOf(x.slug)).map(a=>{const o=chgOf(a.slug), n=needOf(a.slug); return `<tr><td><a href="#app-${a.slug}" class="after" style="text-decoration:none">${esc(a.name)}</a></td><td class="num">${CHG[a.slug].aktif}</td>${CAT_ORDER.map(k=>o[k]?`<td class="num"><a href="#" data-app="${a.slug}" data-k="${k}">${o[k]}</a></td>`:`<td class="num zero">0</td>`).join('')}<td><div class="ctrack" title="${n} card"><i class="b" style="left:0;width:${n/maxN*100}%;background:var(--bad)"></i></div><div class="count">${n}</div></td></tr>`}).join('')}
     </tbody></table></div></div>
    <div class="panel" id="dlist"><h2>Daftar perubahan</h2>
@@ -505,6 +510,7 @@ const pendingCount = ()=>REVIEWABLE.filter(p=>statusOf(p)==='menunggu').length;
 const rekOf = slug=>REK.filter(p=>p.app===slug);
 const PROP = REVIEWABLE; const propOf = slug=>REVIEWABLE.filter(p=>p.app===slug);
 let REDRAW = null;
+let SEOFB={}; const SEOOPEN=new Set(), SEODRAFT={};
 try{ ME = localStorage.getItem('markaz_reviewer')||''; }catch(e){}
 function refreshStore(){ const b=$('#propBadge'); if(b) b.textContent=pendingCount(); if(REDRAW) REDRAW(); }
 const rowToRev = r=>({status:r.status||'menunggu',catatan:r.catatan||'',nama:r.nama_revisi||'',by:r.reviewer||'',at:r.updated_at||''});
@@ -513,15 +519,34 @@ async function loadAll(){
   for(;;){ const {data,error}=await DBX.from('review').select('*').range(from,from+999); if(error) throw error; data.forEach(r=>out[r.key]=rowToRev(r)); if(data.length<1000) break; from+=1000; }
   return out;
 }
+const rowToFb = r=>({feedback:r.feedback||'',by:r.author||'',at:r.updated_at||''});
+async function loadFb(){
+  const out={}; let from=0;
+  for(;;){ const {data,error}=await DBX.from('seo_feedback').select('*').range(from,from+999); if(error) throw error; data.forEach(r=>out[r.key]=rowToFb(r)); if(data.length<1000) break; from+=1000; }
+  return out;
+}
+async function saveFb(key,text){
+  if(!DBX||DBSTATE==='off'){ toast('Database belum tersambung, feedback tidak tersimpan.'); return false; }
+  if(!ME) return askName();
+  const prev=SEOFB[key]; const at=new Date().toISOString();
+  SEOFB={...SEOFB,[key]:{feedback:text,by:ME,at}}; refreshStore();
+  try{
+    const {error}=await DBX.from('seo_feedback').upsert({key,feedback:text,author:ME,updated_at:at},{onConflict:'key'}); if(error) throw error;
+    await DBX.from('seo_feedback_log').insert({key,feedback:text,author:ME});
+    return true;
+  }catch(e){ toast('Gagal menyimpan feedback, coba lagi.'); const o={...SEOFB}; if(prev) o[key]=prev; else delete o[key]; SEOFB=o; refreshStore(); return false; }
+}
 async function initStore(){
   const C=window.MARKAZ_CONFIG||{};
   if(!window.supabase||!C.supabaseUrl||!C.supabaseAnonKey){ DBSTATE='off'; refreshStore(); return; }
   try{ DBX=window.supabase.createClient(C.supabaseUrl,C.supabaseAnonKey,{auth:{persistSession:false}}); }catch(e){ DBSTATE='off'; refreshStore(); return; }
   const t=setTimeout(()=>{ if(DBSTATE==='loading'){ DBSTATE='slow'; refreshStore(); } },10000);
   try{ REV=await loadAll(); clearTimeout(t); DBSTATE='ok'; }catch(e){ clearTimeout(t); DBSTATE='error'; }
+  try{ SEOFB=await loadFb(); }catch(e){}
   refreshStore();
   try{ DBX.channel('review-live').on('postgres_changes',{event:'*',schema:'public',table:'review'},pl=>{ const r=pl.new&&pl.new.key?pl.new:null; if(r){ REV={...REV,[r.key]:rowToRev(r)}; } else if(pl.old&&pl.old.key){ const o={...REV}; delete o[pl.old.key]; REV=o; } refreshStore(); }).subscribe(); }catch(e){}
-  setInterval(async()=>{ if(document.hidden) return; try{ REV=await loadAll(); if(DBSTATE!=='ok'){ DBSTATE='ok'; } refreshStore(); }catch(e){} },60000);
+  try{ DBX.channel('seo-fb-live').on('postgres_changes',{event:'*',schema:'public',table:'seo_feedback'},pl=>{ const r=pl.new&&pl.new.key?pl.new:null; if(r){ SEOFB={...SEOFB,[r.key]:rowToFb(r)}; } refreshStore(); }).subscribe(); }catch(e){}
+  setInterval(async()=>{ if(document.hidden) return; try{ SEOFB=await loadFb(); }catch(e){} try{ REV=await loadAll(); if(DBSTATE!=='ok'){ DBSTATE='ok'; } refreshStore(); }catch(e){} },60000);
 }
 function askName(){
   toast('Isi nama kamu dulu di kotak "Nama peninjau" di atas daftar.');
@@ -592,13 +617,17 @@ function rekRow(p){
       <button class="linkbtn ed-open">${OPEN.has(p.key)?'Tutup catatan':(r.catatan||r.nama?'Ubah catatan':'Tambah catatan')}</button>`
       : `<span class="count">Tidak perlu tinjauan</span>`;
   const dr=DRAFT[p.key]||{};
-  const editor = OPEN.has(p.key)?`<tr class="detail" data-ed="${esc(p.key)}"><td colspan="6"><div class="tool">
+  const editor = OPEN.has(p.key)?`<tr class="detail" data-ed="${esc(p.key)}"><td colspan="7"><div class="tool">
       <div class="field"><label>Nama revisi (opsional)</label><input class="ed-nama" value="${esc(dr.nama??(r.nama||p.s4||''))}" ${dis}><div class="hint">Isi bila tim ingin nama lain. Slug dihitung ulang dari nama ini.</div></div>
       <div class="field"><label>Catatan tim Academy</label><textarea class="ed-cat" ${dis}>${esc(dr.catatan??(r.catatan||''))}</textarea></div>
       <div style="grid-column:1/-1;display:flex;gap:8px;align-items:center"><button class="btn ed-save" ${dis}>Simpan catatan</button><button class="btn ghost ed-close">Tutup</button></div></div></td></tr>`:'';
+  const fb=SEOFB[p.key]||{}, fopen=SEOOPEN.has(p.key);
+  const seoc = fopen ? `<div class="fbed"><textarea class="fb-text" aria-label="Feedback tim SEO" placeholder="Tanggapan tim SEO untuk card ini" ${dis}>${esc(SEODRAFT[p.key]??fb.feedback??'')}</textarea><div style="display:flex;gap:6px;margin-top:6px"><button class="btn fb-save" ${dis}>Simpan</button><button class="btn ghost fb-close">Batal</button></div></div>`
+    : `${fb.feedback?`<div class="fbnote">${esc(fb.feedback)}</div><div class="count" style="margin-top:6px">${fb.by?esc(fb.by)+' · ':''}${esc(fmtAt(fb.at))}</div>`:(r.catatan?'<span class="st skip">Belum dibalas</span>':'<span class="count">Belum ada feedback</span>')}
+      <button class="linkbtn fb-open">${fb.feedback?'Ubah feedback':'Tulis feedback'}</button>`;
   return `<tr data-key="${esc(p.key)}" class="prow st-${needReview(p)?st:'na'}"><td class="cardc"><a href="#app-${p.app}" class="after" style="text-decoration:none">${LOGOS[p.app]?`<img class="lg" src="${LOGOS[p.app]}" alt="">`:''}${esc(a?a.name:p.app)}</a><div><span class="tab-pill">${esc(p.tab)}</span> <span class="count">#${esc(p.id)}</span></div></td>
     ${stepCell(1,'Awal',s1)}${stepCell(2,'Perubahan pertama',s2,baru?undefined:s1)}${c3}
-    <td class="step s4"><span class="sn">4</span>${c4}${chips}${flags}</td><td class="revc">${rev}</td></tr>${editor}`;
+    <td class="step s4"><span class="sn">4</span>${c4}${chips}${flags}</td><td class="revc">${rev}</td><td class="seoc">${seoc}</td></tr>${editor}`;
 }
 function rekapList(box,fixedApp){
   const K='rk'+(fixedApp||'');
@@ -609,24 +638,24 @@ function rekapList(box,fixedApp){
     <div id="rrum"></div><div id="snote"></div>
     <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="rq" type="search" placeholder="Cari nama di tahap mana pun, slug, #id..." aria-label="Cari card"></div>
       <div class="seg" role="group" aria-label="Saring tab">${['','Tryout','Latsol','Course'].map(k=>`<button data-t="${k}" aria-pressed="${k===tab}">${k||'Semua tab'}</button>`).join('')}</div>
-      <select class="sel" id="rshow" aria-label="Tampilkan"><option value="ubah">Hanya yang berubah / perlu keputusan</option><option value="semua">Semua card</option><option value="flag">Ada catatan untuk dicek</option><option value="umum">Perlu keputusan tim</option></select>
+      <select class="sel" id="rshow" aria-label="Tampilkan"><option value="ubah">Hanya yang berubah / perlu keputusan</option><option value="semua">Semua card</option><option value="flag">Ada catatan untuk dicek</option><option value="umum">Perlu keputusan tim</option><option value="belum">Catatan Academy belum dibalas SEO</option><option value="fb">Sudah ada feedback SEO</option></select>
       <select class="sel" id="rst" aria-label="Saring status"><option value="">Semua status</option>${Object.entries(ST).map(([k,s])=>`<option value="${k}">${s.t}</option>`).join('')}</select>
       <span class="count" id="rc"></span></div>
     <div class="bar" style="margin-top:-10px"><button class="btn ghost" id="rbulk"></button><button class="btn ghost" id="rcopy">Salin yang dipakai (untuk dieksekusi)</button></div>
-    <div class="legend4"><span><b>1</b> Awal (sebelum optimasi)</span><span><b>2</b> Perubahan pertama (laporan 2–11 Nov)</span><span><b>3</b> Revisi (nama di aplikasi, 19 Nov)</span><span class="hl"><b>4</b> Saran revisi terbaru 20/11/2026</span><span><mark>kata</mark> = kata baru dibanding nama sekarang</span></div>
-    <div class="tscroll"><table class="rtab"><thead><tr><th style="width:120px">Card</th><th>1 · Awal</th><th>2 · Perubahan pertama</th><th>3 · Revisi</th><th class="h4">4 · Saran revisi 20/11/2026</th><th style="width:210px">Status &amp; catatan Academy</th></tr></thead><tbody id="rt"></tbody></table></div>
+    <div class="legend4"><span><b>1</b> Awal (sebelum optimasi)</span><span><b>2</b> Perubahan pertama (laporan 2–11 Nov)</span><span><b>3</b> Revisi (nama di aplikasi, 19/11)</span><span class="hl"><b>4</b> Saran revisi terbaru 20/11/2026</span><span><mark>kata</mark> = kata baru dibanding nama sekarang</span></div>
+    <div class="tscroll"><table class="rtab"><thead><tr><th style="width:120px">Card</th><th>1 · Awal</th><th>2 · Perubahan pertama</th><th>3 · Revisi</th><th class="h4">4 · Saran revisi 20/11/2026</th><th style="width:210px">Status &amp; catatan Academy</th><th class="hseo" style="width:220px">Feedback tim SEO</th></tr></thead><tbody id="rt"></tbody></table></div>
     <div style="text-align:center;margin-top:12px"><button class="btn ghost" id="rmore" hidden>Tampilkan lebih banyak</button></div>`;
   $('#rshow').value=show; $('#rst').value=st;
   const list=()=>{ const ql=q.toLowerCase();
     return REK.filter(p=>(!app||p.app===app)&&(!tab||p.tab===tab)
-      &&(show==='semua'||(show==='ubah'&&needReview(p))||(show==='flag'&&p.flags.length)||(show==='umum'&&p.src==='umum'))
+      &&(show==='semua'||(show==='ubah'&&needReview(p))||(show==='flag'&&p.flags.length)||(show==='umum'&&p.src==='umum')||(show==='belum'&&REV[p.key]?.catatan&&!SEOFB[p.key]?.feedback)||(show==='fb'&&SEOFB[p.key]?.feedback))
       &&(!st||(needReview(p)&&statusOf(p)===st))
-      &&(!ql||[p.s1,p.s2,p.s3,p.seo,p.s4,p.nslug,p.id,BY[p.app]?.name,REV[p.key]?.catatan].join(' ').toLowerCase().includes(ql))); };
+      &&(!ql||[p.s1,p.s2,p.s3,p.seo,p.s4,p.nslug,p.id,BY[p.app]?.name,REV[p.key]?.catatan,SEOFB[p.key]?.feedback].join(' ').toLowerCase().includes(ql))); };
   const draw=()=>{
     $('#snote').innerHTML=storeNote();
     $('#rrum').innerHTML=app?rumusBox(app):'';
     const L=list(); $('#rc').textContent=`${L.length} card`;
-    $('#rt').innerHTML=L.slice(0,limit).map(rekRow).join('')||`<tr><td colspan="6"><div class="empty">Tidak ada card yang cocok.</div></td></tr>`;
+    $('#rt').innerHTML=L.slice(0,limit).map(rekRow).join('')||`<tr><td colspan="7"><div class="empty">Tidak ada card yang cocok.</div></td></tr>`;
     $('#rmore').hidden=L.length<=limit; $('#rmore').textContent=`Tampilkan lebih banyak (${L.length-limit} lagi)`;
     const pend=L.filter(p=>needReview(p)&&statusOf(p)==='menunggu'&&p.s4).length;
     const bb=$('#rbulk'); bb.disabled=!DBX||!pend; bb.textContent=confirmBulk?`Klik lagi untuk menandai ${pend} card sebagai Dipakai`:`Tandai semua yang tampil & menunggu sebagai Dipakai (${pend})`; bb.classList.toggle('warnbtn',confirmBulk);
@@ -640,11 +669,14 @@ function rekapList(box,fixedApp){
   $('#rshow').addEventListener('change',e=>{ show=e.target.value; limit=60; confirmBulk=false; remember(); draw(); });
   $('#rst').addEventListener('change',e=>{ st=e.target.value; limit=60; confirmBulk=false; remember(); draw(); });
   $('#rmore').addEventListener('click',()=>{ limit+=100; draw(); });
-  $('#rt').addEventListener('input',e=>{ const tr=e.target.closest('tr[data-ed]'); if(!tr) return; DRAFT[tr.dataset.ed]={nama:tr.querySelector('.ed-nama').value,catatan:tr.querySelector('.ed-cat').value}; });
+  $('#rt').addEventListener('input',e=>{ if(e.target.classList.contains('fb-text')){ const r=e.target.closest('tr[data-key]'); if(r) SEODRAFT[r.dataset.key]=e.target.value; return; } const tr=e.target.closest('tr[data-ed]'); if(!tr) return; DRAFT[tr.dataset.ed]={nama:tr.querySelector('.ed-nama').value,catatan:tr.querySelector('.ed-cat').value}; });
   $('#rt').addEventListener('click',async e=>{
     const tr=e.target.closest('tr[data-key],tr[data-ed]'); if(!tr) return; const key=tr.dataset.key||tr.dataset.ed; const p=REK.find(x=>x.key===key);
     const b=e.target.closest('.rvb');
     if(b){ const k=b.dataset.k; const cur=statusOf(p); await saveRev(key,{status:cur===k?'menunggu':k}); if(k==='revisi'&&cur!=='revisi'){ OPEN.add(key); draw(); } return; }
+    if(e.target.closest('.fb-open')){ SEOOPEN.add(key); draw(); const ta=$('#rt').querySelector(`tr[data-key="${CSS.escape(key)}"] .fb-text`); if(ta) ta.focus(); return; }
+    if(e.target.closest('.fb-close')){ SEOOPEN.delete(key); delete SEODRAFT[key]; draw(); return; }
+    if(e.target.closest('.fb-save')){ const txt=(SEODRAFT[key]??tr.querySelector('.fb-text').value).trim(); const ok=await saveFb(key,txt); if(ok!==false){ SEOOPEN.delete(key); delete SEODRAFT[key]; draw(); } return; }
     if(e.target.closest('.ed-open')){ OPEN.has(key)?OPEN.delete(key):OPEN.add(key); draw(); return; }
     if(e.target.closest('.ed-close')){ OPEN.delete(key); delete DRAFT[key]; draw(); return; }
     if(e.target.closest('.ed-save')){ const d=DRAFT[key]||{}; const nama=(d.nama??tr.querySelector('.ed-nama').value).trim(); const cat=(d.catatan??tr.querySelector('.ed-cat').value).trim();
@@ -660,7 +692,7 @@ function rekapList(box,fixedApp){
     const name=p=>REV[p.key]?.nama||p.s4;
     const rows=REVIEWABLE.filter(p=>(!app||p.app===app)&&(statusOf(p)==='setuju'||(statusOf(p)==='revisi'&&REV[p.key]?.nama)));
     if(!rows.length){ toast('Belum ada card yang ditandai Dipakai.'); return; }
-    const tsv=[['Aplikasi','Tab','ID','1 Awal','2 Perubahan pertama','3 Revisi (nama aplikasi)','Data SEO sekarang','4 Nama final','Slug final','Keyword','Catatan'].join('\t'),...rows.map(p=>[BY[p.app]?.name||p.app,p.tab,p.id,p.s1,p.s2,p.s3||p.base,p.seo,name(p),slug2(name(p)),p.nkw,REV[p.key]?.catatan||''].join('\t'))].join('\n');
+    const tsv=[['Aplikasi','Tab','ID','1 Awal','2 Perubahan pertama','3 Revisi (nama aplikasi)','Data SEO sekarang','4 Nama final','Slug final','Keyword','Catatan Academy','Feedback tim SEO'].join('\t'),...rows.map(p=>[BY[p.app]?.name||p.app,p.tab,p.id,p.s1,p.s2,p.s3||p.base,p.seo,name(p),slug2(name(p)),p.nkw,(REV[p.key]?.catatan||'').replace(/\s+/g,' '),(SEOFB[p.key]?.feedback||'').replace(/\s+/g,' ')].join('\t'))].join('\n');
     try{ navigator.clipboard.writeText(tsv).then(()=>toast(`${rows.length} baris disalin (format tabel, bisa ditempel ke Sheets).`),()=>toast('Gagal menyalin.')); }catch(err){ toast('Gagal menyalin.'); }
   });
   draw();
@@ -668,7 +700,7 @@ function rekapList(box,fixedApp){
 function vRekap(){
   const tot=REK.length, ch=REK.filter(isChange).length, um=REK.filter(p=>p.src==='umum').length, fl=REK.filter(p=>p.flags.length).length, tp=REK.filter(p=>p.src==='tetap').length;
   view.innerHTML = `<div class="panel"><h2>Rekap perubahan nama untuk preview tim Academy</h2>
-    <p class="lead">Setiap card ditampilkan dalam empat tahap: nama awal, perubahan pertama (laporan 2–11 Nov), revisi (nama di aplikasi per 19 Nov), dan saran revisi terbaru 20/11/2026. Tahap 4 mengikuti rumus revisi 20/11/2026 per aplikasi; card yang tidak disebut langsung di revisi dibuat dengan rumus yang sama. Belum ada yang diubah di Markaz. Isi nama kamu, lalu beri status <b>Dipakai</b>, <b>Revisi</b> (boleh tulis nama lain), atau <b>Tidak dipakai</b>, dan tambahkan catatan bila perlu.</p>
+    <p class="lead">Setiap card ditampilkan dalam empat tahap: nama awal, perubahan pertama (laporan 2–11 Nov), revisi (nama di aplikasi per 19/11), dan saran revisi terbaru 20/11/2026. Tahap 4 mengikuti rumus revisi 20/11/2026 per aplikasi; card yang tidak disebut langsung di revisi dibuat dengan rumus yang sama. Belum ada yang diubah di Markaz. Isi nama kamu, lalu beri status <b>Dipakai</b>, <b>Revisi</b> (boleh tulis nama lain), atau <b>Tidak dipakai</b>, dan tambahkan catatan bila perlu.</p>
     <div class="stats"><div class="stat"><div class="k">Card aktif</div><div class="v">${tot.toLocaleString('id-ID')}</div></div><div class="stat"><div class="k">Berubah di tahap 4</div><div class="v" style="color:var(--accent)">${ch}</div></div><div class="stat"><div class="k">Sudah sesuai rumus</div><div class="v ok">${tp}</div></div><div class="stat"><div class="k">Perlu keputusan</div><div class="v warn">${um}</div></div><div class="stat"><div class="k">Menunggu tinjauan</div><div class="v" id="rpend">${pendingCount()}</div></div></div>
     <p class="hint" style="margin-top:12px">${fl} card diberi catatan kecil (mis. nama sama dengan card lain, card mitra, atau contoh revisi yang memakai nama Data SEO). Pilih "Ada catatan untuk dicek" untuk melihatnya.</p></div>
    <div class="panel" id="rlist"><h2>Rekap per card</h2><div id="rbox"></div></div>`;
@@ -685,8 +717,8 @@ function vMeeting(){
   const r1=REK.filter(p=>p.src==='meeting').length;
   const O=MEET.ojk, E=MEET.ojkEx;
   const ojrow=k=>`<tr><td class="after">${k==='app'?'Nama di aplikasi':'Data SEO'}</td>${['depan','tengah','belakang'].map(x=>`<td class="num">${O[k][x]||0}</td>`).join('')}<td class="count">${esc(E[k].belakang||'')} · ${esc(E[k].tengah||'')}</td></tr>`;
-  view.innerHTML = `<div class="panel"><div class="hero"><div class="t"><h2>Catatan meeting · 20 Nov 2026</h2><div class="chips"><span class="chip">Tindak lanjut cek ulang 19 Nov</span><span class="chip">Data SEO &amp; Data Kategori</span><span class="chip">Tim SEO + tim Academy</span></div></div></div>
-    <h3>Ringkasan</h3><ul class="prose-list"><li>Laporan 19 Nov dipakai sebagai dasar daftar perubahan per aplikasi.</li><li>Semua perubahan didaftar dulu dan ditinjau tim Academy sebelum dikerjakan di Markaz.</li><li>Setelah meeting, rumus penamaan per aplikasi dikirim sebagai revisi 20/11/2026 (lihat <a href="#rumus20">Rumus Revisi 20/11</a>). Rekap 4 tahap per card ada di <a href="#rekap">Rekap Nama</a>.</li></ul></div>
+  view.innerHTML = `<div class="panel"><div class="hero"><div class="t"><h2>Catatan meeting · 20 Nov 2026</h2><div class="chips"><span class="chip">Tindak lanjut cek ulang 19/11</span><span class="chip">Data SEO &amp; Data Kategori</span><span class="chip">Tim SEO + tim Academy</span></div></div></div>
+    <h3>Ringkasan</h3><ul class="prose-list"><li>Laporan 19/11 dipakai sebagai dasar daftar perubahan per aplikasi.</li><li>Semua perubahan didaftar dulu dan ditinjau tim Academy sebelum dikerjakan di Markaz.</li><li>Setelah meeting, rumus penamaan per aplikasi dikirim sebagai revisi 20/11/2026 (lihat <a href="#rumus20">Rumus Revisi 20/11</a>). Rekap 4 tahap per card ada di <a href="#rekap">Rekap Nama</a>.</li></ul></div>
    <div class="panel"><span class="st ok">Disepakati</span><h2 style="margin-top:8px">1. JadiSekdin — latsol berinstansi: nama sekolah di depan</h2>
     <p>Jika latsol punya instansi sekolah, nama instansinya diletakkan di depan, tepat setelah kata "Soal".</p>
     ${table([['Sebelum','Sesudah'],['Soal TPA Numerik Berhitung STAN','Soal STAN TPA Numerik Berhitung'],['Soal Verbal Silogisme IPDN','Soal IPDN Verbal Silogisme']])}
@@ -697,7 +729,7 @@ function vMeeting(){
     <p>Revisi 20/11/2026: Latsol dan Course JadiOJK memakai "Soal OJK …" dan "Materi OJK …" (OJK di depan). Tryout memakai kata "Tryout" di depan.</p>
     <div class="tscroll"><table><thead><tr><th>Sebelum revisi</th><th class="num">Depan</th><th class="num">Tengah</th><th class="num">Belakang</th><th>Contoh</th></tr></thead><tbody>${ojrow('app')}${ojrow('seo')}</tbody></table></div></div>
    <div class="panel"><span class="st ok">Disepakati</span><h2 style="margin-top:8px">4. Alur kerja: daftar dulu, tinjau, baru ubah</h2>
-    <ol class="steps"><li>Tarik ulang data Markaz dan bandingkan dengan laporan sebelumnya (<a href="#perubahan">Perubahan 19 Nov</a>).</li><li>Susun rekap nama 4 tahap per aplikasi sesuai rumus revisi (<a href="#rekap">Rekap Nama</a>).</li><li>Tim Academy memberi status Dipakai, Revisi, atau Tidak dipakai, plus catatan.</li><li>Hanya yang berstatus Dipakai (atau Revisi dengan nama baru) yang dikerjakan: Data SEO dulu, lalu mirror ke Data Kategori/Data Course, lalu redirect 301 untuk slug yang berubah.</li><li>Hasilnya masuk laporan before–after berikutnya.</li></ol></div>`;
+    <ol class="steps"><li>Tarik ulang data Markaz dan bandingkan dengan laporan sebelumnya (<a href="#perubahan">Perubahan 19/11</a>).</li><li>Susun rekap nama 4 tahap per aplikasi sesuai rumus revisi (<a href="#rekap">Rekap Nama</a>).</li><li>Tim Academy memberi status Dipakai, Revisi, atau Tidak dipakai, plus catatan.</li><li>Hanya yang berstatus Dipakai (atau Revisi dengan nama baru) yang dikerjakan: Data SEO dulu, lalu mirror ke Data Kategori/Data Course, lalu redirect 301 untuk slug yang berubah.</li><li>Hasilnya masuk laporan before–after berikutnya.</li></ol></div>`;
   REDRAW=null;
 }
 
@@ -764,7 +796,7 @@ function setActive(v){
 /* ---------- views ---------- */
 function vPlatform(){
   const f = store.get('pf','semua');
-  view.innerHTML = `<a class="banner" href="#perubahan"><div><b>Cek ulang 19 Nov: ${NEED_TOT} card perlu ditindaklanjuti</b><div class="count">${CHG_TOT.beda+CHG_TOT.baru_beda} nama di aplikasi berbeda dari Data SEO (${YEAR_TOT} hanya beda tahun) · ${CHG_TOT.kosong_baru+CHG_TOT.kosong_lama} card aktif tanpa Data SEO · ${CHG_TOT.nonaktif} dinonaktifkan</div></div><span class="go">Lihat perubahan →</span></a>
+  view.innerHTML = `<a class="banner" href="#perubahan"><div><b>Cek ulang 19/11: ${NEED_TOT} card perlu ditindaklanjuti</b><div class="count">${CHG_TOT.beda+CHG_TOT.baru_beda} nama di aplikasi berbeda dari Data SEO (${YEAR_TOT} hanya beda tahun) · ${CHG_TOT.kosong_baru+CHG_TOT.kosong_lama} card aktif tanpa Data SEO · ${CHG_TOT.nonaktif} dinonaktifkan</div></div><span class="go">Lihat perubahan →</span></a>
     <a class="banner info" href="#rekap"><div><b>Revisi 20/11/2026: ${REVIEWABLE.length} card dengan saran nama baru menunggu tinjauan tim Academy</b><div class="count">Rekap 4 tahap per card: awal → perubahan pertama → revisi → saran revisi terbaru</div></div><span class="go">Buka rekap →</span></a>
     <div class="bar"><div class="searchbox">${ICON_SEARCH}<input id="pq" type="search" placeholder="Search platform..." aria-label="Cari platform"></div>
     <div class="seg" role="group" aria-label="Saring platform">${[['semua','Semua'],['done','Sudah dilaporkan'],['none','Belum ada laporan']].map(([k,l])=>`<button data-f="${k}" aria-pressed="${k===f}">${l}</button>`).join('')}</div>
@@ -777,7 +809,7 @@ function vPlatform(){
       const s=a.stats;
       const meta = a.done ? `<div class="pmeta"><div class="row"><span>${s.opt} dioptimasi</span><span>${s.skip} dilewati</span></div><div class="pbar"><i class="a" style="width:${s.opt/s.aktif*100}%"></i><i class="b" style="width:${s.skip/s.aktif*100}%"></i></div><div class="row"><span>${s.aktif} card aktif</span><span>${esc(s.tanggal)}</span></div></div>`
         : `<div class="pmeta"><div class="ptag">Belum ada laporan</div><div class="row"><span>${esc(a.fokus)}</span></div></div>`;
-      const nd=needOf(a.slug); const chip=CHG[a.slug]?`<div class="pchg${nd?'':' zero'}">${nd?nd+' perlu tindakan (19 Nov)':'Tidak ada perubahan (19 Nov)'}</div>`:'';
+      const nd=needOf(a.slug); const chip=CHG[a.slug]?`<div class="pchg${nd?'':' zero'}">${nd?nd+' perlu tindakan (19/11)':'Tidak ada perubahan (19/11)'}</div>`:'';
       return `<a class="pcard${a.done?'':' none'}" href="#app-${a.slug}">${tier(a)}${mono(a)}<div class="pname">${esc(a.name)}</div>${chip}${meta}</a>`;
     }).join('') || `<div class="empty">Tidak ada platform yang cocok.</div>`;
   };
@@ -850,7 +882,7 @@ function vApp(a){
   const stK='tab:'+a.slug, sub=store.get(stK,'card');
   view.innerHTML = `<div class="panel"><div class="hero">${mono(a,true)}<div class="t"><h2>${esc(a.name)}</h2><div class="chips"><span class="chip">Tier ${a.tier}</span><span class="chip mono-t">?p=${esc(a.kode)}</span><span class="chip">${esc(s.tanggal)}</span><span class="chip">${esc(a.fokus)}</span><span class="chip mono-t">${esc(a.domain)}</span></div></div></div>
     <div class="stats"><div class="stat"><div class="k">Card aktif</div><div class="v">${s.aktif}</div></div><div class="stat"><div class="k">Dioptimasi</div><div class="v ok">${s.opt}</div></div><div class="stat"><div class="k">Dilewati</div><div class="v ${s.skip?'warn':''}">${s.skip}</div></div><div class="stat"><div class="k">Data SEO</div><div class="v" style="font-size:20px">${esc(s.verSeo)}</div></div><div class="stat"><div class="k">Mirror</div><div class="v" style="font-size:20px">${esc(s.verMirror)}</div></div></div>
-    <div class="tabs" role="tablist">${[['card','Card SEO'],['chg','Perubahan 19 Nov ('+needOf(a.slug)+')'],['usulan','Rekap Nama 20/11 ('+propOf(a.slug).length+')'],['skill','Skill & Rumus'],['catatan','Ringkasan & Catatan']].map(([k,l])=>`<button role="tab" data-t="${k}" aria-selected="${k===sub}">${l}</button>`).join('')}</div>
+    <div class="tabs" role="tablist">${[['card','Card SEO'],['chg','Perubahan 19/11 ('+needOf(a.slug)+')'],['usulan','Rekap Nama 20/11 ('+propOf(a.slug).length+')'],['skill','Skill & Rumus'],['catatan','Ringkasan & Catatan']].map(([k,l])=>`<button role="tab" data-t="${k}" aria-selected="${k===sub}">${l}</button>`).join('')}</div>
     <div id="sub"></div></div>`;
   const drawSub=k=>{
     REDRAW=null; store.set(stK,k); view.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===k));
@@ -861,7 +893,7 @@ function vApp(a){
     REDRAW=null;
     if(k==='chg'){
       const items=(CHG[a.slug]?.items||[]).slice().sort((x,y)=>CAT_ORDER.indexOf(x.cat)-CAT_ORDER.indexOf(y.cat)); const o=chgOf(a.slug);
-      box.innerHTML = items.length ? `<p class="lead">Data dibaca ulang dari Markaz pada 19 Nov 2026: ${CHG[a.slug].aktif} card aktif. ${needOf(a.slug)} card perlu tindakan.</p>
+      box.innerHTML = items.length ? `<p class="lead">Data dibaca ulang dari Markaz pada 19/11/2026: ${CHG[a.slug].aktif} card aktif. ${needOf(a.slug)} card perlu tindakan.</p>
         <div class="chips" style="margin-bottom:14px">${CAT_ORDER.filter(k=>o[k]).map(k=>`<span class="st ${CAT[k].c}">${esc(CAT[k].t)}: ${o[k]}</span>`).join('')}</div>${chgTable('at')}`
         : `<div class="empty">Tidak ada perubahan dibanding laporan 11 Nov.</div>`;
       if(items.length) $('#at').innerHTML=chgRows(items.map(i=>({...i,app:a.slug})));
@@ -916,7 +948,7 @@ function vApp(a){
 }
 
 /* ---------- router ---------- */
-const TITLES={platform:'Pilih Platform',perubahan:'Perubahan 19 Nov',meeting:'Catatan Meeting 20 Nov',rekap:'Rekap Nama 20/11/2026',rumus20:'Rumus Revisi 20/11/2026',usulan:'Rekap Nama 20/11/2026',ringkasan:'Ringkasan',rumus:'Rumus SEO',cek:'Cek Isian',kendala:'Kendala & Tindak Lanjut'};
+const TITLES={platform:'Pilih Platform',perubahan:'Perubahan 19/11',meeting:'Catatan Meeting 20 Nov',rekap:'Rekap Nama 20/11/2026',rumus20:'Rumus Revisi 20/11/2026',usulan:'Rekap Nama 20/11/2026',ringkasan:'Ringkasan',rumus:'Rumus SEO',cek:'Cek Isian',kendala:'Kendala & Tindak Lanjut'};
 function route(){
   let v=(location.hash||'#platform').slice(1); if(!TITLES[v]&&!v.startsWith('app-')) v='platform';
   setActive(v); REDRAW=null;
